@@ -17,6 +17,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group:'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	//https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+	implementation group:'io.springfox', name: 'springfox-swagger-ui', version:'3.0.0'
+	implementation group: 'io.springfox', name: 'springfox-data-rest', version: '3.0.0'
+	// postgre driver
+	implementation group: 'org.postgresql', name:'postgresql', version:'42.2.23'
+	//for validation
+	implementation('org.springframework.boot:spring-boot-starter-validation')
 }
 
 test {
