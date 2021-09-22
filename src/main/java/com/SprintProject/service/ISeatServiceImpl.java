@@ -3,10 +3,11 @@ package com.SprintProject.service;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.SprintProject.dao.ISeatRepository;
 import com.SprintProject.entities.Seat;
-
+@Service(value="ISeatService")
 public class ISeatServiceImpl implements ISeatService {
 	@Autowired
 	ISeatRepository repository;

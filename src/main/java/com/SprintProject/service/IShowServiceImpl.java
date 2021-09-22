@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.SprintProject.dao.IShowRepository;
 import com.SprintProject.entities.Show;
 
-@Service
+@Service(value="IShowService")
 public class IShowServiceImpl implements IShowService {
 	@Autowired
 	IShowRepository repository;

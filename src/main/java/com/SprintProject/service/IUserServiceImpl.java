@@ -1,10 +1,11 @@
 package com.SprintProject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.SprintProject.dao.IUserRepository;
 import com.SprintProject.entities.Users;
-
+@Service(value="IUserService")
 public class IUserServiceImpl implements IUserService{
 	@Autowired
     IUserRepository repository;
