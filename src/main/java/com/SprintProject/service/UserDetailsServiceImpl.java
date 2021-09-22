@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		System.out.println("In Authentication" + userName);
-		UserEntity user = userRepository.findByUserName(userName);
+		User user = userRepository.findByUserName(userName);
 		//System.out.println("In Authentication" + user.getUserName());
 		if (user != null) {
 			System.out.println("In Authentication-- if " + user.getUserName());

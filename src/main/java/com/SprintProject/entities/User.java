@@ -1,5 +1,7 @@
 package com.SprintProject.entities;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +27,7 @@ public class User {
 	@JoinColumn(name="customer_id")
 	private Customer customerId;
 	private String password;
-	private String role;
+	private Set<Role> role;
 	
 	public int getUserId() {
 		return userId;
@@ -46,11 +48,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
+	public Set<Role> getRole() {
 		return role;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(Set<Role> roles) {
+		this.role = roles;
 	}
 	
 	
