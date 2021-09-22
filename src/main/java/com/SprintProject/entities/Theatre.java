@@ -9,15 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.SprintProject.entities.Movie;
+
 
 @Entity(name="theatre")
 @Table(name="theatre")
 public class Theatre {
-	private static final long serialVersionUID =1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -32,9 +30,40 @@ public class Theatre {
 	private List<Screen> listOfScreens=new ArrayList<Screen>();
 	private String managerName;
 	private String managerContact;
+	@OneToMany(mappedBy="threatreId",cascade=CascadeType.ALL)
+	private List<Show> listOfShows=new ArrayList<Show>();
+	
 	
 	public int gettheatreId() {
 		return theatreId;
+	}
+	public int getTheatreId() {
+		return theatreId;
+	}
+	public void setTheatreId(int theatreId) {
+		this.theatreId = theatreId;
+	}
+	public String getTheatreName() {
+		return theatreName;
+	}
+	public void setTheatreName(String theatreName) {
+		this.theatreName = theatreName;
+	}
+	public String getTheatreCity() {
+		return theatreCity;
+	}
+	public void setTheatreCity(String theatreCity) {
+		this.theatreCity = theatreCity;
+	}
+	public List<Show> getListOfShows() {
+		return listOfShows;
+	}
+	public void setListOfShows(List<Show> listOfShows) {
+		this.listOfShows = listOfShows;
+		for(Show s:listOfShows)
+		{
+			s.setThreatreId(this);
+		}
 	}
 	public void settheatreId(int theatreId) {
 		this.theatreId = theatreId;

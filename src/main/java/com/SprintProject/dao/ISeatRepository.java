@@ -1,5 +1,10 @@
 package com.SprintProject.dao;
 
-public interface ISeatRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import com.SprintProject.entities.Seat;
+
+public interface ISeatRepository extends JpaRepository<Seat, Integer> {
 
 }

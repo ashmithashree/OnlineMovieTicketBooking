@@ -1,8 +1,6 @@
 package com.SprintProject.entities;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,8 +25,9 @@ public class Show {
 	LocalDateTime showEndTime;
 	String showName;
 	
-
-	int threatreId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name ="threatreid", nullable =false)
+	Theatre threatreId;
 	
 	
 	@OneToOne(mappedBy ="show")
@@ -75,11 +74,12 @@ public class Show {
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
-	public int getThreatreId() {
+	@JsonIgnore
+	public Theatre getThreatreId() {
 		return threatreId;
 	}
-	public void setThreatreId(int threatreId) {
-		this.threatreId = threatreId;
+	public void setThreatreId(Theatre theatre) {
+		this.threatreId = theatre;
 	}
 	
 }

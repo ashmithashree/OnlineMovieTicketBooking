@@ -7,12 +7,11 @@ import com.SprintProject.service.IBookingService;
 
 import java.time.LocalDate;
 import java.util.List;
-
-
-
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service(value="IBookingService")
 public class IBookingServiceImpl implements IBookingService {
     @Autowired
     IBookingRepository repository;
@@ -23,18 +22,19 @@ public class IBookingServiceImpl implements IBookingService {
 
 	@Override
 	public TicketBooking updateBooking(TicketBooking booking) {
-		TicketBooking tic = repository.findById(booking.getBookingId()).orElseThrow(
+		TicketBooking tic = repository.findById(booking.getTicketBookId()).orElseThrow(
 				() -> new EntityNotFoundException("No booking found for this id"));
-		cust.setbookingDate(cust.getbookingDate());
+		tic.setBookingDate(booking.getBookingDate());
 		return repository.save(tic);
 				
 	}
 
 	@Override
 	public TicketBooking cancelBooking(TicketBooking booking) {
-		TicketBooking tic = repository.findByBookingId(bookingid).orElseThrow(
+		TicketBooking tic = repository.findById(booking.getTicketBookId()).orElseThrow(
 				() -> new EntityNotFoundException("No booking found for this id"));
-		return repository.save(tic);
+		repository.deleteById(booking.getTicketBookId());
+		return tic;
 				
 	}
 
@@ -60,7 +60,7 @@ public class IBookingServiceImpl implements IBookingService {
 	@Override
 	public double calculateTotalCost(int bookingid) {
 		// TODO Auto-generated method stub
-		return 0;
+		return repository.calculateTotalCost(bookingid);
 	}
 
 	

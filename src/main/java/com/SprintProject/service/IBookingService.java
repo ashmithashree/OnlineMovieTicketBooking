@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 import com.SprintProject.entities.TicketBooking;
 import java.util.List;
-@Service
+
 public interface IBookingService {
 	public abstract TicketBooking addBooking(TicketBooking booking);
 	public abstract TicketBooking updateBooking(TicketBooking booking);

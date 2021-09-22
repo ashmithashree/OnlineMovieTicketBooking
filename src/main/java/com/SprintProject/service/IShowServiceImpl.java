@@ -1,6 +1,7 @@
 package com.SprintProject.service;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,10 @@ import com.SprintProject.entities.Show;
 public class IShowServiceImpl implements IShowService {
 	@Autowired
 	IShowRepository repository;
-
 	@Override
 	public Show addShow(Show show) {
 		return repository.save(show);
 	}
-
 	@Override
 	public Show updateShow(Show show) {
 		Show s = repository.findById(show.getShowId()).orElseThrow(
@@ -26,37 +25,28 @@ public class IShowServiceImpl implements IShowService {
 		return repository.save(s);
 		
 	}
-
 	@Override
 	public Show removeShow(Show show) {
 		Show s = repository.findById(show.getShowId()).orElseThrow(
 				() -> new EntityNotFoundException("No Show found for the given ID"));
 		repository.delete(show);
-		
-		return(show);
+		return(s);
 	}
-
 	@Override
 	public Show viewShow(Show show) {
-		return repository.findAll(show);
+		return repository.findById(show.getShowId()).get();
 	}
-
 	@Override
 	public List<Show> viewShowList(int theaterid) {
-		List<Show> s = repository.findByTheaterId(theaterid);
-		return s;
+		return repository.findByTheaterId(theaterid);
 	}
-
 	@Override
-	public List<Show> viewShowList(LocalDate date) {
-		List<Show> s = repository.findByDate(date);
-		return s;
+	public List<Show> viewShowList(LocalDateTime date) {
+		return repository.findByshowStartTime(date);
 	}
-
 	@Override
 	public List<Show> viewAllShows() {
-		List<Show> s = repository.findAll();
-		return s;
+		return  repository.findAll();
 	}
 
 }

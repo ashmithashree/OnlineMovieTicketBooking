@@ -29,12 +29,10 @@ public class Movie {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="theatreId", nullable =false)
 	private Theatre theatre;
-	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="showId")
-	
-
 	private Show show;
+	
 	@JsonIgnore
 	public Theatre getTheatre() {
 		return theatre;

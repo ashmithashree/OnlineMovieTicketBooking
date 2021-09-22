@@ -1,5 +1,7 @@
 package com.SprintProject.dao;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +11,6 @@ public interface IShowRepository extends JpaRepository<Show, Integer>{
 
 	List<Show> findByTheaterId(int theaterid);
 
-	Show findAll(Show show);
-
+	List<Show> findByshowStartTime(LocalDateTime date);
+	
 }

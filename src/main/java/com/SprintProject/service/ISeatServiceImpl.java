@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.SprintProject.dao.ISeatRepository;
 import com.SprintProject.entities.Seat;
-import com.SprintProject.entities.Show;
 
 public class ISeatServiceImpl implements ISeatService {
 	@Autowired

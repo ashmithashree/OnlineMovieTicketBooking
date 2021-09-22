@@ -1,6 +1,7 @@
 package com.SprintProject.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.SprintProject.dao.IMovieRepository;
 import com.SprintProject.entities.Movie;
 
-@Service
+@Service(value="IMovieService")
 public class IMovieServiceImpl implements IMovieService {
 	@Autowired
 	IMovieRepository repository;
@@ -48,14 +49,14 @@ public class IMovieServiceImpl implements IMovieService {
 
 	@Override
 	public List<Movie> viewMovieList(int theaterid) {
-		List<Movie> mov = repository.findByTheaterId(theaterid);
+		List<Movie> mov = repository.findByTheater(theaterid);
 		return mov;
 	}
 
 	@Override
-	public List<Movie> viewMovieList(LocalDate date) {
+	public List<Movie> viewMovieList(LocalDateTime date) {
 		List<Movie> mov = repository.findByDate(date);
-		return null;
+		return mov;
 	}
 	
 

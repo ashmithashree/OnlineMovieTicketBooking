@@ -1,15 +1,14 @@
 package com.SprintProject.service;
 
 import java.util.List;
-
 import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.SprintProject.dao.ICustomerRepository;
 import com.SprintProject.entities.Customer;
-import com.SprintProject.entities.TicketBooking;
 
+@Service(value="ICustomerService")
 public class ICustomerServiceImpl implements ICustomerService{
 	@Autowired
     ICustomerRepository repository;
@@ -21,23 +20,24 @@ public class ICustomerServiceImpl implements ICustomerService{
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
-		Customer cust =repository.findBycustomerId(customer.getCustomerId()).orElseThrow(
+		Customer cust =repository.findById(customer.getCustomerId()).orElseThrow(
 				() -> new EntityNotFoundException("no customer found by the id"));
-		cust.setCustomerEmail(cust.getCustomerEmail());
+		cust.setEmail(customer.getEmail());
 		return repository.save(cust); 
 	
 	}
 
 	@Override
-	public Customer delectCustomer(Customer customer) {
-		
-		
+	public Customer deleteCustomer(Customer customer) {
+		Customer cust = repository.findById(customer.getCustomerId()).orElseThrow(
+				() -> new EntityNotFoundException("No Customer found for this id"));
+		repository.deleteById(customer.getCustomerId());
+		return cust;
 	}
 
 	@Override
-	public Customer viewCustomer(int custid) {
-		
-		Customer cust = repository.findById(custid);
+	public Customer viewCustomer(int customerId) {
+		Customer cust = repository.findById(customerId).get();
 	      return cust;
 	}
 
@@ -46,5 +46,7 @@ public class ICustomerServiceImpl implements ICustomerService{
 		List<Customer> cust = repository.findByMovieId(movieid);
 		return cust;
 	}
+
+
 
 }
