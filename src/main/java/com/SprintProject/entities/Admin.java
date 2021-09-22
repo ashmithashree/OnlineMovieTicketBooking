@@ -25,11 +25,11 @@ public class Admin {
 	private String adminContact;
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	private User userId;
-	public User getUserId() {
+	private Users userId;
+	public Users getUserId() {
 		return userId;
 	}
-	public void setUserId(User userId) {
+	public void setUserId(Users userId) {
 		this.userId = userId;
 	}
 	public int getAdminId() {

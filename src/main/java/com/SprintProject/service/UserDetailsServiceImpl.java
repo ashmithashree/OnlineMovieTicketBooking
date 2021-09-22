@@ -16,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import com.SprintProject.dao.IUserRepository;
 import com.SprintProject.entities.Role;
+import com.SprintProject.entities.Users;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -26,11 +27,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		System.out.println("In Authentication" + userName);
-		User user = userRepository.findByUserName(userName);
+		Users user = userRepository.findByUserName(userName);
 		//System.out.println("In Authentication" + user.getUserName());
 		if (user != null) {
 			System.out.println("In Authentication-- if " + user.getUserName());
-            return new User(user.getUserName(), user.getPassword(), createSimpleGrantedAuthorities(user.getRoles()));
+            return  new User (user.getUserName(), user.getPassword(), createSimpleGrantedAuthorities(user.getRole()));
         } else {
         	System.out.println("In Authentication+ ELSE PART" );
             throw new UsernameNotFoundException("User with "

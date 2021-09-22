@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SprintProject.dao.IUserRepository;
-import com.SprintProject.entities.User;
+import com.SprintProject.entities.Users;
 import com.SprintProject.dao.RoleRepository;
 import com.SprintProject.entities.Role;
 import com.SprintProject.entities.Roles;
-import com.SprintProject.model.SignupRequest;
+import com.SprintProject.model.SignUp;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,12 +29,12 @@ public class AuthController {
 	PasswordEncoder encoder;
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> userSignup(@RequestBody SignupRequest signupRequest) {
+	public ResponseEntity<?> userSignup(@RequestBody SignUp signupRequest) {
 		if(userRepository.existsByUserName(signupRequest.getUserName())){
 	      return ResponseEntity.badRequest().body("Username is already taken");
 	    }
 	   
-	    User user = new User();
+	    Users user = new Users();
 	    Set<Role> roles = new HashSet<>();
 	    user.setUserName(signupRequest.getUserName());
 	    user.setPassword(encoder.encode(signupRequest.getPassword()));

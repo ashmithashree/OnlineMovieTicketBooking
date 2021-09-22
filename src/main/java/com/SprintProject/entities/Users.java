@@ -17,18 +17,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="onlineuser")
 @Table(name="onlineuser")
-public class User {
+public class Users {
 	private static final long serialVersionUID =1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int userId;
+	@Column(name="name")
+	private String userName;
+	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="customer_id")
 	private Customer customerId;
 	private String password;
 	private Set<Role> role;
 	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getUserId() {
 		return userId;
 	}

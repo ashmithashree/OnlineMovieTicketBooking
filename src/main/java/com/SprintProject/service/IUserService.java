@@ -1,10 +1,10 @@
 package com.SprintProject.service;
 
-import com.SprintProject.entities.User;
+import com.SprintProject.entities.Users;
 
 public interface IUserService {
-	public abstract User addNewUser(User user);
-	public abstract User signIn(User user);
-	public abstract User signOut(User user);
+	public abstract Users addNewUser(Users user);
+	public abstract Users signIn(Users user);
+	public abstract Users signOut(Users user);
 
 }

@@ -1,6 +1,6 @@
 package com.SprintProject.model;
 
-public class SignupRequest {
+public class SignUp {
 	private String userName; 
 	private String password;
 	private String[] roles;
