@@ -1,11 +1,8 @@
 package com.SprintProject.dao;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.SprintProject.entities.Roles;
-import com.SprintProject.entities.TicketBooking;
+import org.springframework.stereotype.Repository;
 import com.SprintProject.entities.User;
-
+@Repository(value="IUserRepository")
 public interface IUserRepository extends JpaRepository<User, Integer> {
 
 }

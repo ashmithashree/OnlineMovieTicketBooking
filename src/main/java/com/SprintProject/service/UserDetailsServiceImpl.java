@@ -1,4 +1,4 @@
-package com.netjstech.basicsec.service;
+package com.SprintProject.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-
 import com.SprintProject.dao.IUserRepository;
-import com.netjstech.basicsec.dao.UserRepository;
-import com.netjstech.basicsec.entities.Role;
-import com.netjstech.basicsec.entities.UserEntity;
+import com.SprintProject.entities.Role;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
