@@ -10,17 +10,21 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="IBookingService")
+@Transactional(readOnly=true)
 public class IBookingServiceImpl implements IBookingService {
     @Autowired
     IBookingRepository repository;
 	@Override
+	@Transactional
 	public TicketBooking addBooking(TicketBooking booking) {
 		return repository.save(booking);
     }
 
 	@Override
+	@Transactional
 	public TicketBooking updateBooking(TicketBooking booking) {
 		TicketBooking tic = repository.findById(booking.getTicketBookId()).orElseThrow(
 				() -> new EntityNotFoundException("No booking found for this id"));
@@ -30,6 +34,7 @@ public class IBookingServiceImpl implements IBookingService {
 	}
 
 	@Override
+	@Transactional
 	public TicketBooking cancelBooking(TicketBooking booking) {
 		TicketBooking tic = repository.findById(booking.getTicketBookId()).orElseThrow(
 				() -> new EntityNotFoundException("No booking found for this id"));
