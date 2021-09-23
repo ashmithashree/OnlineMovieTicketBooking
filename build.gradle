@@ -20,12 +20,23 @@ dependencies {
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.23'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+<<<<<<< HEAD
     implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
 	implementation('org.springframework.boot:spring-boot-starter-validation')
 	//implementation group: 'io.springfox', name: 'springfox-data-rest', version: '3.0.0'
 	//implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+=======
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-data-rest', version: '3.0.0'
+	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	implementation('org.springframework.boot:spring-boot-starter-validation')
+	   // implementation group: 'io.springfox', name: 'springfox-data-rest', version: '3.0.0'
+	    //implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	      implementation 'org.springframework.security:spring-security-test'
+	    implementation 'org.springframework.boot:spring-boot-starter-security'
+>>>>>>> 71e1d9151dbf0c04caa2643ff2054d95adb2ed60
 
 }
 
