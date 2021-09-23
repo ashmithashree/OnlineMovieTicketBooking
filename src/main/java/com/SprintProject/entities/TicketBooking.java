@@ -22,13 +22,15 @@ public class TicketBooking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	int ticketBookId;
-	int showId;
 	LocalDate bookingDate;
 	int transactionId;
 	String transactionMode;
 	String transactionStatus;
 	double totalCost;
 	
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="ticketId")
+	private Show ShowId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="customerId", nullable =false)
@@ -47,12 +49,12 @@ public class TicketBooking {
 		this.ticketBookId = ticketBookId;
 	}
 
-	public int getShowId() {
-		return showId;
+	public Show getShowId() {
+		return ShowId;
 	}
 
-	public void setShowId(int showId) {
-		this.showId = showId;
+	public void setShowId(Show showId) {
+		ShowId = showId;
 	}
 
 	public LocalDate getBookingDate() {

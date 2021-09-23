@@ -1,15 +1,27 @@
 package com.SprintProject;
 
+
+import org.springframework.context.annotation.Bean;
+
+
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+
+
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.BasicAuth;
 import springfox.documentation.service.Contact;
@@ -61,4 +73,5 @@ public class SwaggerConfiguration {
    private SecurityReference basicAuthReference() {
        return new SecurityReference(BASIC_AUTH, new AuthorizationScope[0]);
    }
+
 }
