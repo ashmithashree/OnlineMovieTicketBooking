@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,18 +39,18 @@ public class CustomerController {
 	
 	}
 
-	@DeleteMapping("/deleting/{customer}")
+	@DeleteMapping("/{customer}")
 	public Customer deleteCustomer(@PathVariable Customer customer) {
 		return custService.deleteCustomer(customer);
 	}
 
-	@GetMapping("/listing/{id}")
-	public Customer viewCustomer(@PathVariable int customerId) {
+	@GetMapping("/CustomerView/{id}")
+	public Customer viewCustomer(@PathVariable(name="id")  int customerId) {
 	    return custService.viewCustomer(customerId);
 	}
 
-	@GetMapping("/listing/{id}")
-	public List<Customer> viewAllCustomers(@PathVariable(name="id") int movieid) {
+	@GetMapping("/{movieid}")
+	public List<Customer> viewAllCustomers(@PathVariable(name="movieid") int movieid) {
 		return custService.viewAllCustomers(movieid);
 	}
 	

@@ -7,13 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.SprintProject.dao.IUserRepository;
 import com.SprintProject.entities.Users;
 @Service(value="IUserService")
-@Transactional(readOnly=true)
+
 public class IUserServiceImpl implements IUserService{
 	@Autowired
     IUserRepository repository;
 	
 	@Override
-	@Transactional
+	
 	public Users addNewUser(Users user) {
 		return repository.save(user);
 	}
@@ -28,4 +28,5 @@ public class IUserServiceImpl implements IUserService{
 		//return repository.save(user);
 		return null;
 	}
+	
 }

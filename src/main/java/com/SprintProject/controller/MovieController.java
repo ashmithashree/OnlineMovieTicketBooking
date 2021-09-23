@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,21 +26,21 @@ public class MovieController {
 	IMovieService movieService;
 	
 	@GetMapping("/{id}")
-	public Movie viewMovie(@Valid @RequestBody int movieid) {
+	public Movie viewMovie(@PathVariable(name="id") int movieid) {
 		return movieService.viewMovie(movieid);
 	}
 	
-	@GetMapping
-    public List<Movie> viewMovieList(@PathVariable int theaterid) {
+	@GetMapping("/moviesbytheater/{theaterid}")
+    public List<Movie> viewMovieList(@PathVariable(name="theaterid") int theaterid) {
 		return movieService.viewMovieList(theaterid);
 	}
 	
-	@GetMapping
-	public List<Movie> viewMovieList(@PathVariable LocalDateTime date) {
+	@GetMapping("/moviesbydate/{date}")
+	public List<Movie> viewMovieList(@PathVariable(name="date") LocalDateTime date) {
 		return movieService.viewMovieList(date);
 	}
 	
-	@GetMapping
+	@GetMapping("/movies")
 	public List<Movie> viewMovieList() {
 		return movieService.viewMovieList();
 	}

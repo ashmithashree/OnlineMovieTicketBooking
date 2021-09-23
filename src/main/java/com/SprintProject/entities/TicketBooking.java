@@ -29,8 +29,8 @@ public class TicketBooking {
 	double totalCost;
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="ticketId")
-	private Show ShowId;
+	@JoinColumn(name="show_id")
+	private Show showId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="customerId", nullable =false)
@@ -50,11 +50,11 @@ public class TicketBooking {
 	}
 
 	public Show getShowId() {
-		return ShowId;
+		return showId;
 	}
 
 	public void setShowId(Show showId) {
-		ShowId = showId;
+		showId = showId;
 	}
 
 	public LocalDate getBookingDate() {
@@ -64,7 +64,7 @@ public class TicketBooking {
 	public void setBookingDate(LocalDate bookingDate) {
 		this.bookingDate = bookingDate;
 	}
-
+     
 	public int getTransactionId() {
 		return transactionId;
 	}

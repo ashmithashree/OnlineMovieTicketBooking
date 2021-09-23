@@ -34,30 +34,7 @@ public class Theatre {
 	private List<Show> listOfShows=new ArrayList<Show>();
 	
 	
-	public int gettheatreId() {
-		return theatreId;
-	}
-	public int getTheatreId() {
-		return theatreId;
-	}
-	public void setTheatreId(int theatreId) {
-		this.theatreId = theatreId;
-	}
-	public String getTheatreName() {
-		return theatreName;
-	}
-	public void setTheatreName(String theatreName) {
-		this.theatreName = theatreName;
-	}
-	public String getTheatreCity() {
-		return theatreCity;
-	}
-	public void setTheatreCity(String theatreCity) {
-		this.theatreCity = theatreCity;
-	}
-	public List<Show> getListOfShows() {
-		return listOfShows;
-	}
+	
 	public void setListOfShows(List<Show> listOfShows) {
 		this.listOfShows = listOfShows;
 		for(Show s:listOfShows)
@@ -65,24 +42,55 @@ public class Theatre {
 			s.setThreatreId(this);
 		}
 	}
-	public void settheatreId(int theatreId) {
+	
+	public int getTheatreId() {
+		return theatreId;
+	}
+
+	public void setTheatreId(int theatreId) {
 		this.theatreId = theatreId;
 	}
-	public String gettheatreName() {
+
+	public String getTheatreName() {
 		return theatreName;
 	}
-	public void settheatreName(String theatreName) {
+
+	public void setTheatreName(String theatreName) {
 		this.theatreName = theatreName;
 	}
-	public String gettheatreCity() {
+
+	public String getTheatreCity() {
 		return theatreCity;
 	}
-	public void settheatreCity(String theatreCity) {
+
+	public void setTheatreCity(String theatreCity) {
 		this.theatreCity = theatreCity;
 	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public String getManagerContact() {
+		return managerContact;
+	}
+
+	public void setManagerContact(String managerContact) {
+		this.managerContact = managerContact;
+	}
+
 	public List<Movie> getListOfMovies() {
 		return listOfMovies;
 	}
+
+	public List<Show> getListOfShows() {
+		return listOfShows;
+	}
+
 	public void setListOfMovies(List<Movie> listOfMovies) {
 		this.listOfMovies = listOfMovies;
 		for(Movie sc: listOfMovies)
@@ -101,17 +109,6 @@ public class Theatre {
 		}
 		
 	}
-	public String getManagerName() {
-		return managerName;
-	}
-	public void setManagerName(String managerName) {
-		this.managerName = managerName;
-	}
-	public String getManagerContact() {
-		return managerContact;
-	}
-	public void setManagerContact(String managerContact) {
-		this.managerContact = managerContact;
-	}
+	
 	
 }

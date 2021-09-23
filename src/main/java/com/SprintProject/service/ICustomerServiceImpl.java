@@ -48,8 +48,8 @@ public class ICustomerServiceImpl implements ICustomerService{
 
 	@Override
 	public List<Customer> viewAllCustomers(int movieid) {
-		List<Customer> cust = repository.findByMovieId(movieid);
-		return cust;
+		//List<Customer> cust = repository.findByMovieId(movieid);
+		return null;
 	}
 
 

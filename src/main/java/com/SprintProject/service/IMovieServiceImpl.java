@@ -55,7 +55,7 @@ public class IMovieServiceImpl implements IMovieService {
 
 	@Override
 	public List<Movie> viewMovieList(int theaterid) {
-		List<Movie> mov = repository.findByTheater(theaterid);
+		List<Movie> mov = repository.findByTheatre(theaterid);
 		return mov;
 	}
 

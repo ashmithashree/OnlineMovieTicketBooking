@@ -1,12 +1,13 @@
 package com.SprintProject.controller;
 
 import java.net.URI;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.SprintProject.entities.Show;
 import com.SprintProject.service.IShowService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/Show")
@@ -26,18 +26,18 @@ public class ShowController {
 	@Autowired
 	IShowService showService;
 	
-	@GetMapping
-	public Show viewShow(@Valid @RequestBody Show show) {
-		return showService.viewShow(show);
+	@GetMapping("/showid/{id}")
+	public Show viewShow(@PathVariable(name="id") int showid) {
+		return showService.viewShow(showid);
 	}
 	
-	@GetMapping
-	public List<Show> viewShowList(@PathVariable int theaterid) {
+	@GetMapping("/showlist/{theaterid}")
+	public List<Show> viewShowList(@PathVariable(name="theaterid") int theaterid) {
 		return showService.viewShowList(theaterid);
 	}
 	
-	@GetMapping
-	public List<Show> viewShowList(@Valid @RequestBody LocalDateTime date) {
+	@GetMapping("/showdate/{date}")
+	public List<Show> viewShowList(@PathVariable(name="date")  LocalDateTime date) {
 		return showService.viewShowList(date);
 	}
 	

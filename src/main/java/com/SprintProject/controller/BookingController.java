@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,26 +40,26 @@ public class BookingController {
 		return ResponseEntity.created(location).body(booking1);
 	}
 	
-	@PutMapping("/booking")
+	@PutMapping("/Ticket")
 	public TicketBooking updateBooking(@Valid @RequestBody TicketBooking booking) {
 		return bookingService.updateBooking(booking);
 	}
 	
-	@DeleteMapping("/deleting/{booking}")
+	@DeleteMapping("/delete/{booking}")
 	public TicketBooking cancelBooking(@PathVariable TicketBooking booking) {
 		return bookingService.cancelBooking(booking);
 	}
 	
-	@GetMapping("/listing/{Id}")
-	public List<TicketBooking> showAllBooking(@PathVariable(name ="Id") int movieId) {
+	@GetMapping("/BookingList/{movieId}")
+	public List<TicketBooking> showAllBooking(@PathVariable(name ="movieId") int movieId) {
 		return bookingService.showAllBooking(movieId);
 	}
-	@GetMapping("/listing/{date}")	
-	public List<TicketBooking> showAllBooking(@PathVariable LocalDate date) {
+	@GetMapping("/BookDate/{date}")	
+	public List<TicketBooking> showAllBooking(@PathVariable(name ="date") LocalDate date) {
 		return bookingService.showAllBooking(date);
 	}
-	@GetMapping("/listing/{id}")
-	public List<TicketBooking> showBookingList(@PathVariable(name ="id")int showId) {
+	@GetMapping("/BookingShowId/{showid}")
+	public List<TicketBooking> showBookingList(@PathVariable(name ="showid")int showId) {
 		return bookingService.showBookingList(showId);
 	}
 	@GetMapping("/Cost/{id}")

@@ -39,12 +39,12 @@ public class IShowServiceImpl implements IShowService {
 		return(s);
 	}
 	@Override
-	public Show viewShow(Show show) {
-		return repository.findById(show.getShowId()).get();
+	public Show viewShow(int showid) {
+		return repository.findById(showid).get();
 	}
 	@Override
 	public List<Show> viewShowList(int theaterid) {
-		return repository.findByTheaterId(theaterid);
+		return repository.findByThreatreId(theaterid);
 	}
 	@Override
 	public List<Show> viewShowList(LocalDateTime date) {
