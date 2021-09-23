@@ -51,7 +51,7 @@ public class IBookingServiceImpl implements IBookingService {
 
 	@Override
 	public List<TicketBooking> showAllBooking(LocalDate date) {
-		List<TicketBooking> tic = repository.findByDate(date);
+		List<TicketBooking> tic = repository.findBybookingDate(date);
 		return tic;
 		
 	}
@@ -65,7 +65,7 @@ public class IBookingServiceImpl implements IBookingService {
 	@Override
 	public double calculateTotalCost(int bookingid) {
 		// TODO Auto-generated method stub
-		return repository.calculateTotalCost(bookingid);
+		return 0;//repository.calculateTotalCost(bookingid);
 	}
 
 	

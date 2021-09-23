@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Import;
 import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 
 @SpringBootApplication
-@Import(SpringDataRestConfiguration.class)
 public class OnlineMovieTicketBookingApplication {
 
 	public static void main(String[] args) {

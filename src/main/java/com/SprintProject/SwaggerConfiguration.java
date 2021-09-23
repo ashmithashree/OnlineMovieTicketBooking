@@ -34,7 +34,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-//@EnableSwagger2
+@EnableSwagger2
 public class SwaggerConfiguration {
 	private static final String BASIC_AUTH = "basicAuth";
 	@Bean
@@ -46,7 +46,7 @@ public class SwaggerConfiguration {
 		 
         return new Docket(DocumentationType.OAS_30)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.netjstech.basicsec"))
+                .apis(RequestHandlerSelectors.basePackage("com.SprintProject"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(apiEndPointInfo())
                 .securitySchemes(Collections.singletonList(authenticationScheme))

@@ -1,5 +1,6 @@
 package com.SprintProject.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,7 +33,12 @@ public class Users {
 	@JoinColumn(name="customer_id")
 	private Customer customerId;
 	private String password;
-	private Set<Role> role;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_role", 
+	      joinColumns = @JoinColumn(name="user_id", referencedColumnName="id"),
+	      inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName="role_id"))
+  	private Set<Role> roles = new HashSet<>();
 	
 	public String getUserName() {
 		return userName;
@@ -57,12 +65,13 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Set<Role> getRole() {
-		return role;
+	public Set<Role> getRoles() {
+		return roles;
 	}
-	public void setRole(Set<Role> roles) {
-		this.role = roles;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
+	
 	
 	
 }
