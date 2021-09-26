@@ -1,5 +1,7 @@
 package com.SprintProject.service;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,8 @@ public class ISeatServiceImpl implements ISeatService {
 	@Autowired
 	ISeatRepository repository;
 
-	@Override
-	@Transactional
-	public Seat bookSeat(Seat seat) {
-		Seat s=repository.save(seat);
-		return s;
-	}
-
+	
+	int n=0;
 	@Override
 	@Transactional
 	public Seat cancleSeatBooking(Seat seat) {
@@ -35,6 +32,22 @@ public class ISeatServiceImpl implements ISeatService {
 	public Seat blockSeat(Seat seat) {
 		
 		return null;
+	}
+	@Override
+	public List<Integer> bookSeat(int seat) {
+		// TODO Auto-generated method stub
+		
+		for(int i=n;i<seat;i++)
+		{
+			if(repository.checkAvaliablity(i));
+			{
+				
+				//Seat c=findById(i);//update
+			}
+				
+		}
+		n+=seat;
+		return null; 
 	}
 
 }

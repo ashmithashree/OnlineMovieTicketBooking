@@ -32,7 +32,7 @@ public class Customer {
 	private String email;
 	private String password;
 	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
-	private Set<TicketBooking> ticketId =new HashSet<>();
+	private Set<TicketBooking> ticket=new HashSet<>();
 	
 	public int getCustomerId() {
 		return customerId;
@@ -70,12 +70,12 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Set<TicketBooking> getTicketId() {
-		return ticketId;
+	public Set<TicketBooking> getTicket() {
+		return ticket;
 	}
-	public void setTicketId(Set<TicketBooking> ticketId) {
-		this.ticketId = ticketId;
-		for(TicketBooking tx:ticketId)
+	public void setTicket(Set<TicketBooking> ticket) {
+		this.ticket = ticket;
+		for(TicketBooking tx:ticket)
 		{
 			tx.setCustomer(this);
 		}

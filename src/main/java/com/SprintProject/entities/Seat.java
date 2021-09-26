@@ -21,11 +21,20 @@ public class Seat {
 	int seatId;
 	String seatNumber;
 	String type;
+	String booked;
 	double price;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="ticketId", nullable =false)
 	private Ticket ticket;
+
+	public String getBooked() {
+		return booked;
+	}
+
+	public void setBooked(String booked) {
+		this.booked = booked;
+	}
 
 	public int getSeatId() {
 		return seatId;

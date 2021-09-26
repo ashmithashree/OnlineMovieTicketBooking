@@ -1,7 +1,14 @@
 package com.SprintProject.service;
 
+import com.SprintProject.entities.Customer;
+import com.SprintProject.entities.Show;
+import com.SprintProject.entities.Ticket;
 import com.SprintProject.entities.TicketBooking;
+import com.SprintProject.HouseFullException;
 import com.SprintProject.dao.IBookingRepository;
+import com.SprintProject.dao.ICustomerRepository;
+import com.SprintProject.dao.IShowRepository;
+import com.SprintProject.dao.ITicketRepository;
 import com.SprintProject.service.IBookingService;
 
 
@@ -17,12 +24,34 @@ import org.springframework.transaction.annotation.Transactional;
 public class IBookingServiceImpl implements IBookingService {
     @Autowired
     IBookingRepository repository;
+    @Autowired
+    ISeatServiceImpl seatService;
+    @Autowired
+    ICustomerRepository custrepo;
+    @Autowired
+    IShowRepository showrepo;
+    @Autowired
+    ITicketRepository ticketrepo;
+    int totalSeatInScreen1;
+    int totalSeatInScree2;
+    int totalSeatInScreen3;
 	@Override
 	@Transactional
 	public TicketBooking addBooking(TicketBooking booking) {
-		return repository.save(booking);
+		repository.save(booking);
+		
+		//int no_of_seats_available=repository.ticketAvailablityInScreen(booking.getTicketBookId());
+		//int	no_of_seats_asked=repository.ticketRequested(booking.getTicketBookId());
+//		if(no_of_seats_asked<no_of_seats_available)
+//		{	
+//			seatService.bookSeat(no_of_seats_asked);
+//			
+		return booking;
+//		}
+//		else 
+//			throw new HouseFullException(null);
     }
-
+	
 	@Override
 	@Transactional
 	public TicketBooking updateBooking(TicketBooking booking) {
@@ -58,7 +87,7 @@ public class IBookingServiceImpl implements IBookingService {
 
 	@Override
 	public List<TicketBooking> showBookingList(int showId) {
-		List<TicketBooking> tic = repository.findByShowId(showId);
+		List<TicketBooking> tic = repository.findByShow(showId);
 		return tic;
 	}
 
@@ -67,6 +96,49 @@ public class IBookingServiceImpl implements IBookingService {
 		// TODO Auto-generated method stub
 		return 0;//repository.calculateTotalCost(bookingid);
 	}
+
+	@Override
+	public void initBooking(int screenId) {
+		// TODO Auto-generated method stub
+		//if()
+		//=repository.initBooking(screenId);
+		
+	}
+	@Override
+	@Transactional
+	public TicketBooking addCustomer(int customerId, int ticketBookId) {
+		Customer customer = custrepo.findById(customerId).orElseThrow(
+				()-> new EntityNotFoundException("You should be a customer to book ticket, check id"));
+		TicketBooking ticketbook=repository.findById(ticketBookId).orElseThrow(
+				()-> new EntityNotFoundException("No Ticked Booked in this Id, check id"));
+		ticketbook.setCustomer( customer);	
+		return repository.save(ticketbook);
+	}
+
+	@Override
+	@Transactional
+	public TicketBooking addShow(int showId, int ticketBookId) {
+		// TODO Auto-generated method stub
+		Show show = showrepo.findById(showId).orElseThrow(
+				()-> new EntityNotFoundException("There is no show avaliable in this show id, check id"));
+		TicketBooking ticketbook=repository.findById(ticketBookId).orElseThrow(
+				()-> new EntityNotFoundException("No Ticked Booked in this Id, check id"));
+		ticketbook.setShow(show);	
+		return repository.save(ticketbook);
+	}
+
+	@Override
+	@Transactional
+	public TicketBooking addTicket(int ticketId, int ticketBookId) {
+		// TODO Auto-generated method stub
+		Ticket ticket = ticketrepo.findById(ticketId).orElseThrow(
+				()-> new EntityNotFoundException("There is no ticket in this ticket id, check id"));
+		TicketBooking ticketbook=repository.findById(ticketBookId).orElseThrow(
+				()-> new EntityNotFoundException("No Ticked Booked in this Id, check id"));
+		ticketbook.setTicket(ticket);	
+		return repository.save(ticketbook);
+	}
+	
 
 	
 

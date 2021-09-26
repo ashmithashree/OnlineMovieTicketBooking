@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.SprintProject.entities.Theatre;
-@Repository
+@Repository(value="ITheatreRepository")
 public interface ITheatreRepository extends JpaRepository<Theatre, Integer> {
 
 }

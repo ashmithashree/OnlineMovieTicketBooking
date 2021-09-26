@@ -30,11 +30,10 @@ public class TicketBooking {
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="show_id")
-	private Show showId;
+	private Show show;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="customerId", nullable =false)
-
 	private Customer customer;
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
@@ -49,14 +48,6 @@ public class TicketBooking {
 		this.ticketBookId = ticketBookId;
 	}
 
-	public Show getShowId() {
-		return showId;
-	}
-
-	public void setShowId(Show showId) {
-		showId = showId;
-	}
-
 	public LocalDate getBookingDate() {
 		return bookingDate;
 	}
@@ -64,7 +55,7 @@ public class TicketBooking {
 	public void setBookingDate(LocalDate bookingDate) {
 		this.bookingDate = bookingDate;
 	}
-     
+
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -96,6 +87,14 @@ public class TicketBooking {
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
+	
+	public Show getShow() {
+		return show;
+	}
+
+	public void setShow(Show show) {
+		this.show = show;
+	}
 	@JsonIgnore
 	public Customer getCustomer() {
 		return customer;
@@ -104,7 +103,6 @@ public class TicketBooking {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
 	public Ticket getTicket() {
 		return ticket;
 	}
@@ -112,5 +110,7 @@ public class TicketBooking {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
+
+
 	
 }

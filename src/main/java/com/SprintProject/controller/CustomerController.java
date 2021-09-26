@@ -40,7 +40,7 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/{customer}")
-	public Customer deleteCustomer(@PathVariable Customer customer) {
+	public Customer deleteCustomer(@RequestBody Customer customer) {
 		return custService.deleteCustomer(customer);
 	}
 

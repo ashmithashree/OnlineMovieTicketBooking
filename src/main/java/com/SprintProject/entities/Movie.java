@@ -32,14 +32,13 @@ public class Movie {
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="showId")
-	Show showId;
+	Show show;
 	
-	@JsonIgnore
-	public Show getShowId() {
-		return showId;
+	public Show getShow() {
+		return show;
 	}
-	public void setShowId(Show showId) {
-		this.showId = showId;
+	public void setShow(Show show) {
+		this.show = show;
 	}
 	@JsonIgnore
 	public Theatre getTheatre() {

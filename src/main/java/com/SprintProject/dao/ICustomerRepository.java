@@ -8,6 +8,6 @@ import com.SprintProject.entities.Customer;
 
 @Repository(value="ICustomerRepository")
 public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
-	@Query("select c from onlinecustomer c join fetch c.ticketId t join fetch t.showId s join fetch s.movie m where m.movieId=:pdata ")
+	@Query("select c from onlinecustomer c join fetch c.ticket t join fetch t.show s join fetch s.movie m where m.movieId=:pdata ")
 	List<Customer> findByMovieId(@Param("pdata")int movieid);
 }

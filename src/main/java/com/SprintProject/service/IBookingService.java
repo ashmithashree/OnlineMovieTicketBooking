@@ -12,5 +12,8 @@ public interface IBookingService {
 	public abstract List<TicketBooking> showAllBooking(LocalDate date);
 	public abstract List<TicketBooking> showBookingList(int showId);
     public abstract double calculateTotalCost(int bookingid);
-
+	public abstract void initBooking(int screenId);
+	public abstract TicketBooking addCustomer(int customerId, int ticketBookId);
+	public abstract TicketBooking addShow(int showId, int ticketBookId);
+	public abstract TicketBooking addTicket(int ticketId, int ticketBookId);
 }

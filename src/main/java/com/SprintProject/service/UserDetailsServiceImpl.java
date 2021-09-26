@@ -28,11 +28,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		System.out.println("In Authentication" + userName);
 		Users user = userRepository.findByUserName(userName);
-		//System.out.println("In Authentication" + user.getUserName());
+		
 		if (user != null) {
 			System.out.println("In Authentication-- if " + user.getUserName());
+			System.out.println("In Authentication" + user.getUserName());
             return  new User (user.getUserName(), user.getPassword(), createSimpleGrantedAuthorities(user.getRoles()));
-        } else {
+            
+        } 
+		else {
         	System.out.println("In Authentication+ ELSE PART" );
             throw new UsernameNotFoundException("User with "
                     + "user name "+ userName + " not found");
