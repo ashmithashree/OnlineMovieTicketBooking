@@ -68,10 +68,7 @@ public class UserController {
 	    user.setPassword(encoder.encode(signupRequest.getPassword()));
 	    System.out.println("Encoded password--- " + user.getPassword());
 	    String[] roleArr = signupRequest.getRoles();
-	    for(String s:roleArr)
-	    {
-	    	System.out.println(s);
-	    }
+	   
 	    if(roleArr == null) {
 	      roles.add(roleRepository.findByRoleName(Roles.ROLE_USER).get());
 	    }

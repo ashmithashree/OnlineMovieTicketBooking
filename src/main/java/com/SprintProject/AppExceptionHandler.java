@@ -36,7 +36,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler{
 	 }
 	 @ExceptionHandler(HouseFullException.class)
 	 public ResponseEntity<Object> HouseFullExceptionHandler(Exception ex, WebRequest request) {
-		 String msg = "Sorry for Inconvience The Screen is HouseFull";
+		 String msg = "Sorry for Inconvience The Screen is HouseFull \uD83D\uDE15";
 		 return handleExceptionInternal(ex, msg, new HttpHeaders(), 
 				 HttpStatus.CONFLICT, request);
 	 }

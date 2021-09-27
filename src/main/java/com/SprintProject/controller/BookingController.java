@@ -35,37 +35,52 @@ public class BookingController {
 	
 	@PostMapping("/{customerId}/{showId}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<List<String>> addBooking(@PathVariable(name="customerId")int customerId ,
+	public ResponseEntity<?> addBooking(@PathVariable(name="customerId")int customerId ,
 			@RequestBody TicketBooking booking,@PathVariable(name="showId")int showId ) {
 		List<String> booking1 =bookingService.addBooking(booking,customerId,showId);
-		return ResponseEntity.created(null).body(booking1);
+		return ResponseEntity.created(null).body("Thank you for booking!/nHere is you seats/n"+booking1+"/nEnjoy the Movie \uD83D\uDE00");
 	}
-	
 	@PutMapping("/Ticket")
-	public TicketBooking updateBooking( @RequestBody TicketBooking booking) {
-		return bookingService.updateBooking(booking);
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public ResponseEntity<?> updateBooking( @RequestBody TicketBooking booking) {
+		TicketBooking booking1= bookingService.updateBooking(booking);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(booking1.getTicketBookId())
+				.toUri();
+		return ResponseEntity.created(location).body(booking1 +" Updated Successfully \uD83D\uDE00");
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
-	public TicketBooking cancelBooking(@RequestBody TicketBooking booking) {
-		return bookingService.cancelBooking(booking);
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<?> cancelBooking(@RequestBody TicketBooking booking) {
+		TicketBooking deleting = bookingService.cancelBooking(booking);
+		return ResponseEntity.ok().body(deleting.getTicketBookId() + " Booking Cancelled. Oh! Not interested in this movie \uD83D\uDE15" );
+	}
+	@RequestMapping(value = "/ByMovie/{movieId}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.FOUND)
+	public List<TicketBooking> showAllBooking(@PathVariable(name ="movieId") int movieId) {
+		List<TicketBooking> booking = bookingService.showAllBooking(movieId);
+		return booking;
 	}
 	
-	@GetMapping("/BookingList/{movieId}")
-	public List<TicketBooking> showAllBooking(@PathVariable(name ="movieId") int movieId) {
-		return bookingService.showAllBooking(movieId);
-	}
-	@GetMapping("/BookDate/{date}")	
+	@RequestMapping(value = "/ByDate/{date}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.FOUND)
 	public List<TicketBooking> showAllBooking(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-		return bookingService.showAllBooking(date);
+		List<TicketBooking> booking = bookingService.showAllBooking(date);
+		
+		return booking ;
 	}
+	
 	@RequestMapping(value = "/BookByShow/{showId}", method = RequestMethod.GET)
-	public List<TicketBooking> showBookingList(@PathVariable(name ="showId")int showId) {
-		return bookingService.showBookingList(showId);
+	@ResponseStatus(HttpStatus.FOUND)
+	public  List<TicketBooking> showBookingList(@PathVariable(name ="showId")int showId) {
+		List<TicketBooking> booking=bookingService.showBookingList(showId);
+		return booking;
 	}
 	@GetMapping("/Cost/{id}")
-	public double calculateTotalCost(@PathVariable(name ="id") int bookingid) {
-		return bookingService.calculateTotalCost(bookingid);
+	public ResponseEntity<?>  calculateTotalCost(@PathVariable(name ="id") int bookingid) {
+		double b=bookingService.calculateTotalCost(bookingid);
+		return ResponseEntity.created(null).body("Your total cost is: "+b);
 	}
 	@PostMapping("/InitBooking/{screenId}")
 	public ResponseEntity<String> initBooking(@PathVariable(name="screenId") int screenId)

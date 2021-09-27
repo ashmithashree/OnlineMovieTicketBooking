@@ -36,6 +36,8 @@ public class TicketBooking {
 	@JoinColumn(name ="customerId", nullable =false)
 	private Customer customer;
 	
+	
+
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="ticketId")
 	private Ticket ticket;
@@ -112,6 +114,11 @@ public class TicketBooking {
 		this.ticket = ticket;
 	}
 
-
+	@Override
+	public String toString() {
+		return "TicketBooking [ticketBookId=" + ticketBookId + ", bookingDate=" + bookingDate + ", transactionId="
+				+ transactionId + ", transactionMode=" + transactionMode + ", transactionStatus=" + transactionStatus
+				+ ", totalCost=" + totalCost + ", show=" + show + ", customer=" + customer + ", ticket=" + ticket + "]";
+	}
 	
 }

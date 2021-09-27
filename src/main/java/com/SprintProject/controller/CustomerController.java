@@ -1,5 +1,5 @@
 package com.SprintProject.controller;
-
+import org.springframework.http.HttpStatus;
 import java.net.URI;
 import java.util.List;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -35,25 +36,32 @@ public class CustomerController {
 		return ResponseEntity.created(location).body(cust1);
 	}
 
+	
 	@PutMapping
-	public Customer updateCustomer(@RequestBody Customer customer) {
-		return custService.updateCustomer(customer);
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
+		Customer cust=custService.updateCustomer(customer);
+		return ResponseEntity.accepted().body(cust + " Updated Successfully \uD83D\uDE00");
 	
 	}
-
+	
 	@DeleteMapping("/{customer}")
-	public Customer deleteCustomer(@RequestBody Customer customer) {
-		return custService.deleteCustomer(customer);
-	}
-
-	@GetMapping("/CustomerView/{id}")
-	public Customer viewCustomer(@PathVariable(name="id")  int customerId) {
-	    return custService.viewCustomer(customerId);
-	}
-
-	@GetMapping("/{movieid}")
-	public List<Customer> viewAllCustomers(@PathVariable(name="movieid") int movieid) {
-		return custService.viewAllCustomers(movieid);
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<String> deleteCustomer(@RequestBody Customer customer) {
+		Customer custdelete= custService.deleteCustomer(customer);
+		return ResponseEntity.ok().body(custdelete.getCustomerId() + " Customer deleted. Oh! We miss You \uD83D\uDE15" );
 	}
 	
+	@GetMapping("/CustomerView/{id}")
+	@ResponseStatus(HttpStatus.FOUND)
+	public Customer viewCustomer(@PathVariable(name="id")  int customerId) {
+		Customer cust= custService.viewCustomer(customerId);
+		return cust;
+	}
+	@GetMapping("/{movieid}")
+	@ResponseStatus(HttpStatus.FOUND)
+	public List<Customer> viewAllCustomers(@PathVariable(name="movieid") int movieid) {
+		List<Customer> allcust=custService.viewAllCustomers(movieid);
+		return allcust;
+	}
 }
