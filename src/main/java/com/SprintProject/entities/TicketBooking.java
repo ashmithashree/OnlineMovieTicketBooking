@@ -28,7 +28,7 @@ public class TicketBooking {
 	String transactionStatus;
 	double totalCost;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval = true)
 	@JoinColumn(name="show_id")
 	private Show show;
 	

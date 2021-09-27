@@ -42,8 +42,9 @@ public class MovieController {
 	}
 	
 	@GetMapping("/moviesbydate/{date}")
-	public List<Movie> viewMovieList(@RequestParam("localDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime date) {
-		return movieService.viewMovieList(date);
+	public List<Movie> viewMovieList(@RequestParam("localDateTime") CharSequence date) {
+		LocalDateTime StartDateTime=LocalDateTime.parse(date);
+		return movieService.viewMovieList(StartDateTime);
 	}
 	
 	@GetMapping("/movies")
@@ -75,24 +76,5 @@ public class MovieController {
 	public Movie removeMovie(@PathVariable(name="movieId") int movieid) {
 		return movieService.removeMovie(movieid);
 	}
-//	@RequestMapping(value = "/showAddition/{movieId}/{showId}", method = RequestMethod.PUT)
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	public ResponseEntity<Movie> addShow(@RequestBody Show showId,@PathVariable(name="movieId") int movieId) {
-//		Movie mov= movieService.addShow(showId,movieId);
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//				.buildAndExpand(movieId)
-//				.toUri();
-//		return ResponseEntity.created(location).body(mov);
-//	}
-//	@RequestMapping(value = "/theaterAddition/{movieId}/{theatreId}", method = RequestMethod.PUT)
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	public ResponseEntity<Movie> addTheatre(@PathVariable(name="theatreId") int theatreId,@PathVariable(name="movieId") int movieId) {
-//		Movie mov= movieService.addTheater(theatreId,movieId);
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//				.buildAndExpand(movieId)
-//				.toUri();
-//		return ResponseEntity.created(location).body(mov);
-//	}
-
 
 }

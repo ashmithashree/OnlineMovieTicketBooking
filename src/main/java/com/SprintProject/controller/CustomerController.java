@@ -3,6 +3,8 @@ package com.SprintProject.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ public class CustomerController {
     ICustomerServiceImpl custService;
 	
 	@PostMapping
-	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer customer) {
 		Customer cust1 = custService.addCustomer(customer);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(cust1.getCustomerId())

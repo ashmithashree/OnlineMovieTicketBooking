@@ -44,8 +44,8 @@ public class IBookingServiceImpl implements IBookingService {
     @Autowired
     IScreenRepository screenrepo;
     int totalSeatInScreen1;
-    int totalSeatInScreen2;
-    int totalSeatInScreen3;
+    int totalSeatInScreen2=0;
+    int totalSeatInScreen3=0;
 	@Override
 	@Transactional
 	public List<String> addBooking(TicketBooking booking, int customerId,int showId) {
@@ -56,26 +56,28 @@ public class IBookingServiceImpl implements IBookingService {
 		booking.setShow(show);
 		booking.setCustomer(customer);	
 		repository.save(booking);
-//		int no_of_seats_available=repository.ticketAvailablityInScreen(booking.getTicketBookId());//100
-//		int	no_of_seats_asked=repository.ticketRequested(booking.getTicketBookId());//10
-//		totalSeatInScreen1-=no_of_seats_asked;//90
-//		if(no_of_seats_available>=totalSeatInScreen1)
-//		{	
-//			List<Integer>al=seatService.bookSeat(no_of_seats_asked);
-//			List<String> seatnumber=new ArrayList<String>();
-//			for(int seat:al)
-//			{
-//				Seat s=seatrepo.findById(seat).get();
-//				seatnumber.add(s.getSeatNumber());
-//				
-//			}
-			return null;//seatnumber;
-//		}			
-//		else 
-//		{
-//			totalSeatInScreen1+=no_of_seats_asked;
-//			throw new HouseFullException(null);
-//		}
+		int no_of_seats_available=repository.ticketAvailablityInScreen(booking.getTicketBookId());//100
+		int	no_of_seats_asked=repository.ticketRequested(booking.getTicketBookId());//10
+		totalSeatInScreen2-=no_of_seats_asked;//90
+		System.out.println(totalSeatInScreen1+" "+totalSeatInScreen2+" "+totalSeatInScreen3);
+		
+		if(totalSeatInScreen2<=no_of_seats_available)
+		{	
+			List<Integer>al=seatService.bookSeat(no_of_seats_asked,booking.getTicket());
+			List<String> seatnumber=new ArrayList<String>();
+			for(int seat:al)
+			{
+				Seat s=seatrepo.findById(seat).get();
+				seatnumber.add(s.getSeatNumber());
+				
+			}
+			return seatnumber;
+		}			
+		else 
+		{
+			totalSeatInScreen3+=no_of_seats_asked;
+			throw new HouseFullException(null);
+		}
     }
 	
 	@Override
@@ -120,7 +122,7 @@ public class IBookingServiceImpl implements IBookingService {
 	@Override
 	public double calculateTotalCost(int bookingid) {
 		// TODO Auto-generated method stub
-		return 0;//repository.calculateTotalCost(bookingid);
+		return repository.calculateTotalCost(bookingid);
 	}
 
 	@Override
@@ -133,82 +135,17 @@ public class IBookingServiceImpl implements IBookingService {
 		if(s.getScreenName().equals("screen 1"))
 		{
 			totalSeatInScreen1=num;
-			for(int i=0;i<totalSeatInScreen1;i++)
-			{
-				Seat seat=new Seat();
-				int asciivalue = 'A'+i; 
-				String str = Character.toString((char) asciivalue+i);
-				seat.setSeatNumber(str+i);//A0
-				seat.setPrice(200);
-				seatrepo.save(seat);
-			}
+			System.out.println(totalSeatInScreen1);
 		}
 		else if(s.getScreenName().equals("screen 2"))
 		{
 			totalSeatInScreen2=num;
-			for(int i=0;i<totalSeatInScreen2;i++)
-			{
-				Seat seat=new Seat();
-				int asciivalue = 'A'+i; 
-				String str = Character.toString((char) asciivalue+i);
-				seat.setSeatNumber(str+i);
-				seat.setPrice(200);
-				seatrepo.save(seat);
-			}
+			System.out.println(totalSeatInScreen2);
 		}
 		else
 		{
 			totalSeatInScreen3=num;
-			for(int i=0;i<totalSeatInScreen3;i++)
-			{
-				Seat seat=new Seat();
-				int asciivalue = 'A'+i; 
-				String str = Character.toString((char) asciivalue+i);
-				seat.setSeatNumber(str+i);
-				seat.setPrice(200);
-				seatrepo.save(seat);
-			}
+			System.out.println(totalSeatInScreen3);
 		}
-		
-		
 	}
-	@Override
-	@Transactional
-	public TicketBooking addCustomer(int customerId, int ticketBookId) {
-		Customer customer = custrepo.findById(customerId).orElseThrow(
-				()-> new EntityNotFoundException("You should be a customer to book ticket, check id"));
-		System.out.println(ticketBookId);
-		TicketBooking ticketbook=repository.findById(ticketBookId).orElseThrow(
-				()-> new EntityNotFoundException("No Ticked Booked in this Id, check id"));
-		ticketbook.setCustomer(customer);	
-		return repository.save(ticketbook);
-	}
-
-	@Override
-	@Transactional
-	public TicketBooking addShow(int showId, int ticketBookId) {
-		// TODO Auto-generated method stub
-		Show show = showrepo.findById(showId).orElseThrow(
-				()-> new EntityNotFoundException("There is no show avaliable in this show id, check id"));
-		TicketBooking ticketbook=repository.findById(ticketBookId).orElseThrow(
-				()-> new EntityNotFoundException("No Ticked Booked in this Id, check id"));
-		ticketbook.setShow(show);	
-		return repository.save(ticketbook);
-	}
-
-	@Override
-	@Transactional
-	public TicketBooking addTicket(int ticketId, int ticketBookId) {
-		// TODO Auto-generated method stub
-		Ticket ticket = ticketrepo.findById(ticketId).orElseThrow(
-				()-> new EntityNotFoundException("There is no ticket in this ticket id, check id"));
-		TicketBooking ticketbook=repository.findById(ticketBookId).orElseThrow(
-				()-> new EntityNotFoundException("No Ticked Booked in this Id, check id"));
-		ticketbook.setTicket(ticket);	
-		return repository.save(ticketbook);
-	}
-	
-
-	
-
 }

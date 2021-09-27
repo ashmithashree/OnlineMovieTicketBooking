@@ -30,7 +30,7 @@ public class Movie {
 	@JoinColumn(name ="theatreId", nullable =false)
 	private Theatre theatre;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name="showId")
 	Show show;
 	

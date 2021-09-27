@@ -31,7 +31,7 @@ public class Show {
 	@JoinColumn(name ="theatreid")
 	Theatre theatre;
 	
-	@OneToOne(mappedBy="show")
+	@OneToOne(mappedBy="show", orphanRemoval = true)
 	Movie movie;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

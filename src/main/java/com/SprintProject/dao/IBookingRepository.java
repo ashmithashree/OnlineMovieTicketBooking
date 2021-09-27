@@ -16,11 +16,14 @@ public interface IBookingRepository extends JpaRepository<TicketBooking, Integer
 	List<TicketBooking> findByBookingDate(@Param("pdata")LocalDate date);
 	@Query("select t from ticketbooking t join fetch t.show s where s.showId=:pdata")
 	List<TicketBooking> findByShow(@Param("pdata")int showId);
-//	@Query("select t.noOfSeats*s.price from ticketbooking tb join fetch tb.ticket t join fetch t.seatNumber s where ticketBookId=:pdata " )
-//	double calculateTotalCost(@Param("pdata")int bookingid);
-//	@Query("select s.rows*s.columns from ticketbooking tb join fetch tb.showId show join fetch show.screenid s where tb.ticketBookId=:pdata")
-//	int ticketAvailablityInScreen(@Param("pdata")int ticketBookid);
-//	@Query("select t.noOfSeats from ticketbooking tb join fetch tb.ticket t where tb.ticketBookId=:pdata")
-//	int ticketRequested(@Param("pdata") int ticketBookId);
+	
+	@Query("select t.noOfSeats*200 from ticketbooking tb join tb.ticket t where tb.ticketBookId=:pdata " )
+	double calculateTotalCost(@Param("pdata")int bookingid);
+	
+	@Query("select s.rows*s.columns from ticketbooking tb join tb.show sh join sh.screen s where tb.ticketBookId=:pdata")
+	int ticketAvailablityInScreen(@Param("pdata")int ticketBookid);
+	
+	@Query("select t.noOfSeats from ticketbooking tb join tb.ticket t where tb.ticketBookId=:pdata")
+	int ticketRequested(@Param("pdata") int ticketBookId);
 
 }

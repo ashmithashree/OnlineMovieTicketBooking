@@ -28,7 +28,7 @@ import com.SprintProject.service.IShowService;
 
 
 @RestController
-@RequestMapping("/Show")
+@RequestMapping("/show")
 public class ShowController {
 	@Autowired
 	IShowService showService;
@@ -43,8 +43,9 @@ public class ShowController {
 	}
 	
 	@GetMapping("/ByDate/{date}")
-	public List<Show> viewShowList(@RequestParam("date")@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime dateTime) {
-		return showService.viewShowList(dateTime);
+	public List<Show> viewShowList(@RequestParam("date")CharSequence dateTime) {
+		LocalDateTime StartDateTime=LocalDateTime.parse(dateTime);
+		return showService.viewShowList(StartDateTime);
 	}
 	
 	@GetMapping("/shows")

@@ -17,8 +17,6 @@ public interface IMovieService {
 	public abstract List<Movie> viewMovieList();
 	public abstract List<Movie> viewMovieList(int theaterid);
 	public abstract List<Movie> viewMovieList(LocalDateTime date);
-	public abstract Movie addTheater(int theatreId, int movieId);
-	public abstract Movie addShow(Show showId, int movieId);
 	
 
 }
