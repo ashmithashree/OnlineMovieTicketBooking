@@ -1,18 +1,14 @@
 package com.SprintProject.service;
 
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SprintProject.dao.IShowRepository;
 import com.SprintProject.entities.Show;
-
 
 @Service(value="IShowService")
 @Transactional(readOnly=true)
@@ -42,12 +38,12 @@ public class IShowServiceImpl implements IShowService {
 		return(s);
 	}
 	@Override
-	public Show viewShow(Show show) {
-		return repository.findById(show.getShowId()).get();
+	public Show viewShow(int showid) {
+		return repository.findById(showid).get();
 	}
 	@Override
 	public List<Show> viewShowList(int theaterid) {
-		return repository.findByTheaterId(theaterid);
+		return repository.findByThreatreId(theaterid);
 	}
 	@Override
 	public List<Show> viewShowList(LocalDateTime date) {
@@ -57,5 +53,5 @@ public class IShowServiceImpl implements IShowService {
 	public List<Show> viewAllShows() {
 		return  repository.findAll();
 	}
-	
+
 }

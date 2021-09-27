@@ -6,9 +6,8 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.SprintProject.dao.IMovieRepository;
-import com.SprintProject.entities.Movie;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.SprintProject.dao.IMovieRepository;
 import com.SprintProject.entities.Movie;
 
@@ -19,15 +18,12 @@ public class IMovieServiceImpl implements IMovieService {
 	IMovieRepository repository;
 
 	@Override
-
 	@Transactional
-
 	public Movie addMovie(Movie movie) {
 		return repository.save(movie);
 	}
 
 	@Override
-
 	@Transactional
 	public Movie updateMovie(Movie movie) {
 		Movie mov = repository.findById(movie.getMovieId()).orElseThrow(
@@ -37,13 +33,13 @@ public class IMovieServiceImpl implements IMovieService {
 	}
 
 	@Override
-    @Transactional
+	@Transactional
 	public Movie removeMovie(int movieid) {
 		Movie mov = repository.findById(movieid).orElseThrow(
 				            ()-> new EntityNotFoundException("No Customer found for the given ID"));
 		            repository.deleteById(movieid);
 		
-		return mov;
+		return repository.save(mov);
 	}
 
 	@Override
@@ -59,19 +55,15 @@ public class IMovieServiceImpl implements IMovieService {
 
 	@Override
 	public List<Movie> viewMovieList(int theaterid) {
-
-		List<Movie> mov = repository.findByTheater(theaterid);
-
+		List<Movie> mov = repository.findByTheatre(theaterid);
 		return mov;
 	}
 
 	@Override
-
 	public List<Movie> viewMovieList(LocalDateTime date) {
 		List<Movie> mov = repository.findByDate(date);
 		return mov;
 	}
-
 	
 
 }

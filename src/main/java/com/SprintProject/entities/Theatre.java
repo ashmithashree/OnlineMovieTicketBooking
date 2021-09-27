@@ -33,10 +33,6 @@ public class Theatre {
 	@OneToMany(mappedBy="threatreId",cascade=CascadeType.ALL)
 	private List<Show> listOfShows=new ArrayList<Show>();
 	
-	
-	public int gettheatreId() {
-		return theatreId;
-	}
 	public int getTheatreId() {
 		return theatreId;
 	}
@@ -65,21 +61,7 @@ public class Theatre {
 			s.setThreatreId(this);
 		}
 	}
-	public void settheatreId(int theatreId) {
-		this.theatreId = theatreId;
-	}
-	public String gettheatreName() {
-		return theatreName;
-	}
-	public void settheatreName(String theatreName) {
-		this.theatreName = theatreName;
-	}
-	public String gettheatreCity() {
-		return theatreCity;
-	}
-	public void settheatreCity(String theatreCity) {
-		this.theatreCity = theatreCity;
-	}
+	
 	public List<Movie> getListOfMovies() {
 		return listOfMovies;
 	}

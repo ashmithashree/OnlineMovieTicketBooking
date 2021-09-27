@@ -1,8 +1,6 @@
 package com.SprintProject.dao;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.SprintProject.entities.Seat;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.SprintProject.entities.Seat;
@@ -11,3 +9,4 @@ import com.SprintProject.entities.Seat;
 public interface ISeatRepository extends JpaRepository<Seat, Integer> {
 	
 }
+

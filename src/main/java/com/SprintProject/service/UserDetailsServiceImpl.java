@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		//System.out.println("In Authentication" + user.getUserName());
 		if (user != null) {
 			System.out.println("In Authentication-- if " + user.getUserName());
-            return  new User (user.getUserName(), user.getPassword(), createSimpleGrantedAuthorities(user.getRole()));
+            return  new User (user.getUserName(), user.getPassword(), createSimpleGrantedAuthorities(user.getRoles()));
         } else {
         	System.out.println("In Authentication+ ELSE PART" );
             throw new UsernameNotFoundException("User with "

@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="movie")
 @Table(name="movie")
 public class Movie {
@@ -29,22 +29,36 @@ public class Movie {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="theatreId", nullable =false)
 	private Theatre theatre;
+	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="showId")
-	private Show show;
+	Show showId;
 	
+	public Movie(int movieId, String movieName, String movieGenre, String movieHours, String language, String description) {
+		this.movieId = movieId;
+		this.movieName = movieName;
+		this.movieGenre = movieGenre;
+		this.movieHours = movieHours;
+		this.language = language;
+		this.description = description;
+		}
+	public Movie() {
+		
+	}
+	
+	@JsonIgnore
+	public Show getShowId() {
+		return showId;
+	}
+	public void setShowId(Show showId) {
+		this.showId = showId;
+	}
 	@JsonIgnore
 	public Theatre getTheatre() {
 		return theatre;
 	}
 	public void setTheatre(Theatre theatre) {
 		this.theatre = theatre;
-	}
-	public Show getShow() {
-		return show;
-	}
-	public void setShow(Show show) {
-		this.show = show;
 	}
 	public int getMovieId() {
 		return movieId;
@@ -82,5 +96,6 @@ public class Movie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	
 }

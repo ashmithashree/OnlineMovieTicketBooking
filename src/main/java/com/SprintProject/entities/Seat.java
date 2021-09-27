@@ -23,6 +23,17 @@ public class Seat {
 	String type;
 	double price;
 	
+	public Seat(int seatId, String seatNumber, String type, double price) {
+		this.seatId=seatId;
+		this.seatNumber=seatNumber;
+		this.type=type;
+		this.price=price;
+	}
+	
+	public Seat() {
+		
+	}
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="ticketId", nullable =false)
 	private Ticket ticket;
@@ -66,5 +77,4 @@ public class Seat {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
-
 }

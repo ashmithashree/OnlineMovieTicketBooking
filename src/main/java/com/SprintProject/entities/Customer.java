@@ -30,6 +30,19 @@ public class Customer {
 	private String mobileNumber;
 	private String email;
 	private String password;
+	
+	public Customer(int customerId, String customerName, String address, String mobileNumber, String email, String password) {
+		this.customerId=customerId;
+		this.address=address;
+		this.customerName=customerName;
+		this.mobileNumber=mobileNumber;
+		this.email=email;
+		this.password=password;
+	}
+	public Customer() {
+		
+	}
+	
 	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
 	private Set<TicketBooking> ticketId =new HashSet<>();
 	
@@ -79,5 +92,5 @@ public class Customer {
 			tx.setCustomer(this);
 		}
 	}
-
+	
 }

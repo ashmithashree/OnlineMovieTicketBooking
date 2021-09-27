@@ -10,5 +10,4 @@ public interface ICustomerService {
 	public abstract Customer deleteCustomer(Customer customer);
 	public abstract Customer viewCustomer(int custid);
 	public abstract List<Customer> viewAllCustomers(int movieid);
-
 }

@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="ticketbooking")
 @Table(name="ticketbooking")
 public class TicketBooking {
@@ -28,9 +28,22 @@ public class TicketBooking {
 	String transactionStatus;
 	double totalCost;
 	
+	public TicketBooking(int ticketBookId, LocalDate bookingDate, int transactionId, String transactionMode, String transactionStatus, double totalCost) {
+		this.ticketBookId=ticketBookId;
+		this.bookingDate=bookingDate;
+		this.transactionId=transactionId;
+		this.transactionStatus=transactionStatus;
+		this.transactionMode=transactionMode;
+		this.totalCost=totalCost;
+	}
+	
+	public TicketBooking() {
+		
+	}
+	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="ticketId")
-	private Show ShowId;
+	@JoinColumn(name="show_id")
+	private Show showId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="customerId", nullable =false)
@@ -50,11 +63,11 @@ public class TicketBooking {
 	}
 
 	public Show getShowId() {
-		return ShowId;
+		return showId;
 	}
 
 	public void setShowId(Show showId) {
-		ShowId = showId;
+		showId = showId;
 	}
 
 	public LocalDate getBookingDate() {
@@ -64,7 +77,7 @@ public class TicketBooking {
 	public void setBookingDate(LocalDate bookingDate) {
 		this.bookingDate = bookingDate;
 	}
-
+     
 	public int getTransactionId() {
 		return transactionId;
 	}

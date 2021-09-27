@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity(name="screen")
 @Table(name="screen")
 public class Screen {
-	
 	private static final long serialVersionUID =1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,5 +77,4 @@ public class Screen {
 	public void setColumns(int columns) {
 		this.columns = columns;
 	}
-
 }

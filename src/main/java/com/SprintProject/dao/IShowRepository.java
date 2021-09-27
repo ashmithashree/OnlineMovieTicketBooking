@@ -8,7 +8,6 @@ import com.SprintProject.entities.Show;
 
 @Repository(value="IShowRepository")
 public interface IShowRepository extends JpaRepository<Show, Integer>{
-	List<Show> findByTheaterId(int theaterid);
+	List<Show> findByThreatreId(int theatreid);
 	List<Show> findByshowStartTime(LocalDateTime date);
-
 }
