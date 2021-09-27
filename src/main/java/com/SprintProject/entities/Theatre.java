@@ -26,71 +26,47 @@ public class Theatre {
 	private String theatreCity;
 	@OneToMany(mappedBy="theatre",cascade=CascadeType.ALL)
 	private List<Movie> listOfMovies=new ArrayList<Movie>();
-	@OneToMany(mappedBy="theatreId",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="theatre",cascade=CascadeType.ALL)
 	private List<Screen> listOfScreens=new ArrayList<Screen>();
 	private String managerName;
 	private String managerContact;
-	@OneToMany(mappedBy="threatreId",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="theatre",cascade=CascadeType.ALL)
 	private List<Show> listOfShows=new ArrayList<Show>();
 	
 	
 	
+	public int getTheatreId() {
+		return theatreId;
+	}
+	public void setTheatreId(int theatreId) {
+		this.theatreId = theatreId;
+	}
+	public String getTheatreName() {
+		return theatreName;
+	}
+	public void setTheatreName(String theatreName) {
+		this.theatreName = theatreName;
+	}
+	public String getTheatreCity() {
+		return theatreCity;
+	}
+	public void setTheatreCity(String theatreCity) {
+		this.theatreCity = theatreCity;
+	}
+	public List<Show> getListOfShows() {
+		return listOfShows;
+	}
 	public void setListOfShows(List<Show> listOfShows) {
 		this.listOfShows = listOfShows;
 		for(Show s:listOfShows)
 		{
-			s.setThreatreId(this);
+			s.setTheatre(this);
 		}
 	}
 	
-	public int getTheatreId() {
-		return theatreId;
-	}
-
-	public void setTheatreId(int theatreId) {
-		this.theatreId = theatreId;
-	}
-
-	public String getTheatreName() {
-		return theatreName;
-	}
-
-	public void setTheatreName(String theatreName) {
-		this.theatreName = theatreName;
-	}
-
-	public String getTheatreCity() {
-		return theatreCity;
-	}
-
-	public void setTheatreCity(String theatreCity) {
-		this.theatreCity = theatreCity;
-	}
-
-	public String getManagerName() {
-		return managerName;
-	}
-
-	public void setManagerName(String managerName) {
-		this.managerName = managerName;
-	}
-
-	public String getManagerContact() {
-		return managerContact;
-	}
-
-	public void setManagerContact(String managerContact) {
-		this.managerContact = managerContact;
-	}
-
 	public List<Movie> getListOfMovies() {
 		return listOfMovies;
 	}
-
-	public List<Show> getListOfShows() {
-		return listOfShows;
-	}
-
 	public void setListOfMovies(List<Movie> listOfMovies) {
 		this.listOfMovies = listOfMovies;
 		for(Movie sc: listOfMovies)
@@ -105,10 +81,21 @@ public class Theatre {
 		this.listOfScreens = listOfScreens;
 		for(Screen sc: listOfScreens)
 		{
-			sc.setTheatreId(this);
+			sc.setTheatre(this);
 		}
 		
 	}
-	
+	public String getManagerName() {
+		return managerName;
+	}
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+	public String getManagerContact() {
+		return managerContact;
+	}
+	public void setManagerContact(String managerContact) {
+		this.managerContact = managerContact;
+	}
 	
 }

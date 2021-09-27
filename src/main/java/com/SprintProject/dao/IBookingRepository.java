@@ -10,12 +10,20 @@ import org.springframework.stereotype.Repository;
 import com.SprintProject.entities.TicketBooking;
 @Repository(value="IBookingRepository")
 public interface IBookingRepository extends JpaRepository<TicketBooking, Integer>{
-	@Query("select t from ticketbooking t join fetch t.showId s join fetch s.movie m where m.movieId=:pdata")
+	@Query("select t from ticketbooking t join fetch t.show s join fetch s.movie m where m.movieId=:pdata")
 	List<TicketBooking> findByMovieId(@Param("pdata")int movieId);
-	List<TicketBooking> findBybookingDate(LocalDate date);
-	List<TicketBooking> findByShowId(int showId);
-//	@Query("select t.noOfSeats*s.price from ticketbooking tb join fetch tb.ticket t join fetch t.seatNumber s where ticketBookId=:pdata " )
-//	double calculateTotalCost(@Param("pdata")int bookingid);
-
+	@Query("select t from ticketbooking t where t.bookingDate=:pdata")
+	List<TicketBooking> findByBookingDate(@Param("pdata")LocalDate date);
+	@Query("select t from ticketbooking t join fetch t.show s where s.showId=:pdata")
+	List<TicketBooking> findByShow(@Param("pdata")int showId);
 	
+	@Query("select t.noOfSeats*200 from ticketbooking tb join tb.ticket t where tb.ticketBookId=:pdata " )
+	double calculateTotalCost(@Param("pdata")int bookingid);
+	
+	@Query("select s.rows*s.columns from ticketbooking tb join tb.show sh join sh.screen s where tb.ticketBookId=:pdata")
+	int ticketAvailablityInScreen(@Param("pdata")int ticketBookid);
+	
+	@Query("select t.noOfSeats from ticketbooking tb join tb.ticket t where tb.ticketBookId=:pdata")
+	int ticketRequested(@Param("pdata") int ticketBookId);
+
 }

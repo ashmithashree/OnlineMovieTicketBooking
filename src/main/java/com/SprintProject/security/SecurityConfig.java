@@ -29,7 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
 		.authorizeRequests().antMatchers(HttpMethod.DELETE).hasRole(Role.ADMIN)
-		.antMatchers("/myapp/**").hasAnyRole(Role.ADMIN, Role.USER)
+		.antMatchers("/show/**").hasRole(Role.ADMIN)
+		.antMatchers("/movie/**").hasRole(Role.ADMIN)
+		.antMatchers("/customer/**").hasRole(Role.USER)
+		.antMatchers("/booking/**").hasRole(Role.USER)
+		
 		.and()
 		.authorizeRequests().anyRequest().permitAll().and()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();

@@ -28,64 +28,74 @@ public class Show {
 	String showName;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name ="threatreid", nullable =false)
-	Theatre threatreId;
+	@JoinColumn(name ="theatreid")
+	Theatre theatre;
 	
-	
-	
-	
-	@OneToOne(mappedBy="showId")
+	@OneToOne(mappedBy="show", orphanRemoval = true)
 	Movie movie;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name ="Screenid", nullable =false)
-	private Screen screenid;
-	
-	@JsonIgnore
-	public Screen getScreenid() {
-		return screenid;
-	}
-	public void setScreenid(Screen screenid) {
-		this.screenid = screenid;
-	}
+	@JoinColumn(name ="Screenid")
+	private Screen screen;
+
 	public int getShowId() {
 		return showId;
 	}
+
 	public void setShowId(int showId) {
 		this.showId = showId;
 	}
+
 	public LocalDateTime getShowStartTime() {
 		return showStartTime;
 	}
-	
+
 	public void setShowStartTime(LocalDateTime showStartTime) {
 		this.showStartTime = showStartTime;
 	}
+
 	public LocalDateTime getShowEndTime() {
 		return showEndTime;
 	}
+
 	public void setShowEndTime(LocalDateTime showEndTime) {
 		this.showEndTime = showEndTime;
 	}
+
 	public String getShowName() {
 		return showName;
 	}
+
 	public void setShowName(String showName) {
 		this.showName = showName;
+	}
+	@JsonIgnore
+	public Theatre getTheatre() {
+		return theatre;
+	}
+
+	public void setTheatre(Theatre threatre) {
+		this.theatre = threatre;
 	}
 	@JsonIgnore
 	public Movie getMovie() {
 		return movie;
 	}
+
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
 	@JsonIgnore
-	public Theatre getThreatreId() {
-		return threatreId;
+	public Screen getScreen() {
+		return screen;
 	}
-	public void setThreatreId(Theatre theatre) {
-		this.threatreId = theatre;
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
 	}
+
+	
+	
+	
 	
 }

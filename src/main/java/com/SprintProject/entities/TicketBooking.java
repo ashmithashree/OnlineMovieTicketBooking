@@ -28,16 +28,17 @@ public class TicketBooking {
 	String transactionStatus;
 	double totalCost;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval = true)
 	@JoinColumn(name="show_id")
-	private Show showId;
+	private Show show;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="customerId", nullable =false)
-
 	private Customer customer;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	
+
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="ticketId")
 	private Ticket ticket;
 
@@ -49,14 +50,6 @@ public class TicketBooking {
 		this.ticketBookId = ticketBookId;
 	}
 
-	public Show getShowId() {
-		return showId;
-	}
-
-	public void setShowId(Show showId) {
-		showId = showId;
-	}
-
 	public LocalDate getBookingDate() {
 		return bookingDate;
 	}
@@ -64,7 +57,7 @@ public class TicketBooking {
 	public void setBookingDate(LocalDate bookingDate) {
 		this.bookingDate = bookingDate;
 	}
-     
+
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -96,21 +89,36 @@ public class TicketBooking {
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
+	
+	public Show getShow() {
+		return show;
+	}
+
+	public void setShow(Show show) {
+		this.show = show;
+	}
 	@JsonIgnore
 	public Customer getCustomer() {
 		return customer;
 	}
-
+	
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
+	
 	public Ticket getTicket() {
 		return ticket;
 	}
 
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
+	}
+
+	@Override
+	public String toString() {
+		return "TicketBooking [ticketBookId=" + ticketBookId + ", bookingDate=" + bookingDate + ", transactionId="
+				+ transactionId + ", transactionMode=" + transactionMode + ", transactionStatus=" + transactionStatus
+				+ ", totalCost=" + totalCost + ", show=" + show + ", customer=" + customer + ", ticket=" + ticket + "]";
 	}
 	
 }

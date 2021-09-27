@@ -30,16 +30,15 @@ public class Movie {
 	@JoinColumn(name ="theatreId", nullable =false)
 	private Theatre theatre;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name="showId")
-	Show showId;
+	Show show;
 	
-	@JsonIgnore
-	public Show getShowId() {
-		return showId;
+	public Show getShow() {
+		return show;
 	}
-	public void setShowId(Show showId) {
-		this.showId = showId;
+	public void setShow(Show show) {
+		this.show = show;
 	}
 	@JsonIgnore
 	public Theatre getTheatre() {

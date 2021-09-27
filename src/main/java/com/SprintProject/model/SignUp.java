@@ -22,5 +22,4 @@ public class SignUp {
 	public void setRoles(String[] roles) {
 		this.roles = roles;
 	}
-	
 }

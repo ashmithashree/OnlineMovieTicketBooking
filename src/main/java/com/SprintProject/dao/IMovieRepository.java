@@ -9,8 +9,9 @@ import com.SprintProject.entities.Movie;
 
 @Repository(value="IMovieRepository")
 public interface IMovieRepository extends JpaRepository<Movie, Integer>   {
-	List<Movie> findByTheatre(int theaterid);
-	@Query("select m from movie m join fetch m.showId s where s.showStartTime=:pdate")
+	@Query("select m from movie m join fetch m.theatre t where t.theatreId=:pdata")
+	List<Movie> findByTheatre(@Param("pdata")int theaterid);
+	@Query("select m from movie m join fetch m.show s where s.showStartTime=:pdate")
 	List<Movie> findByDate(@Param("pdate")LocalDateTime date);
 
 }

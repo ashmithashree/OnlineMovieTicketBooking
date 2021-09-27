@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import com.SprintProject.entities.Screen;
 import com.SprintProject.entities.Show;
 
 public interface IShowService {
@@ -14,4 +17,6 @@ public interface IShowService {
 	public abstract List<Show> viewShowList(int theaterid);
 	public abstract List<Show> viewShowList(LocalDateTime date);
 	public abstract List<Show> viewAllShows();
+	public abstract Show addScreen(int screenId, int showId);
+	public abstract Show addTheatre(int theatreId, int showId);
 }

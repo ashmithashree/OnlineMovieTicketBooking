@@ -25,14 +25,14 @@ public class Screen {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int screenId;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="theatre_id",nullable=false)
-	private Theatre theatreId;
+	private Theatre theatre;
 	
 	@Column(name="name")
 	private String screenName;
 	
-	@OneToMany(mappedBy="screenid",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="screen",cascade=CascadeType.ALL)
 	private List<Show> showList=new ArrayList<Show>();
 	private int rows;
 	private int columns;
@@ -43,27 +43,25 @@ public class Screen {
 	public void setScreenId(int screenId) {
 		this.screenId = screenId;
 	}
-	@JsonIgnore
-	public Theatre getTheatreId() {
-		return theatreId;
+
+	public void setShowList(List<Show> showList) {
+		this.showList = showList;
+		for(Show s:showList) {
+			s.setScreen(this);
+		}
 	}
-	public void setTheatreId(Theatre theatre) {
-		this.theatreId = theatre;
+	@JsonIgnore
+	public Theatre getTheatre() {
+		return theatre;
+	}
+	public void setTheatre(Theatre theatre) {
+		this.theatre = theatre;
 	}
 	public String getScreenName() {
 		return screenName;
 	}
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
-	}
-	public List<Show> getShowList() {
-		return showList;
-	}
-	public void setShowList(List<Show> showList) {
-		this.showList = showList;
-		for(Show s:showList) {
-			s.setScreenid(this);
-		}
 	}
 	public int getRows() {
 		return rows;
@@ -77,4 +75,8 @@ public class Screen {
 	public void setColumns(int columns) {
 		this.columns = columns;
 	}
+	public List<Show> getShowList() {
+		return showList;
+	}
+	
 }
