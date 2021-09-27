@@ -10,7 +10,7 @@ import com.SprintProject.entities.Show;
 
 public interface IMovieService {
 	
-	public abstract Movie addMovie(Movie movie);
+	public abstract Movie addMovie(Movie movie,int theatreId);
 	public abstract Movie updateMovie(Movie movie);
 	public abstract Movie removeMovie(int movieid);
 	public abstract Movie viewMovie(int movieid);

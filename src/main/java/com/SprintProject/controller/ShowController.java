@@ -37,15 +37,14 @@ public class ShowController {
 	public Show viewShow(@PathVariable(name="id") int showid) {
 		return showService.viewShow(showid);
 	}
-	
-	@GetMapping("/ByTheater/{theatreId}")
+	@RequestMapping(value = "/ByTheater/{theatreId}", method = RequestMethod.GET)
 	public List<Show> viewShowList(@PathVariable(name="theatreId") int theatreid) {
 		return showService.viewShowList(theatreid);
 	}
 	
 	@GetMapping("/ByDate/{date}")
-	public List<Show> viewShowList(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate date) {
-		return showService.viewShowList(date);
+	public List<Show> viewShowList(@RequestParam("date")@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime dateTime) {
+		return showService.viewShowList(dateTime);
 	}
 	
 	@GetMapping("/shows")

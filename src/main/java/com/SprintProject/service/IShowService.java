@@ -15,7 +15,7 @@ public interface IShowService {
 	public abstract Show removeShow(Show show);
 	public abstract Show viewShow(int showid);
 	public abstract List<Show> viewShowList(int theaterid);
-	public abstract List<Show> viewShowList(LocalDate date);
+	public abstract List<Show> viewShowList(LocalDateTime date);
 	public abstract List<Show> viewAllShows();
 	public abstract Show addScreen(int screenId, int showId);
 	public abstract Show addTheatre(int theatreId, int showId);

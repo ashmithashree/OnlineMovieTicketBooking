@@ -30,7 +30,7 @@ public class Theatre {
 	private List<Screen> listOfScreens=new ArrayList<Screen>();
 	private String managerName;
 	private String managerContact;
-	@OneToMany(mappedBy="threatre",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="theatre",cascade=CascadeType.ALL)
 	private List<Show> listOfShows=new ArrayList<Show>();
 	
 	
@@ -60,7 +60,7 @@ public class Theatre {
 		this.listOfShows = listOfShows;
 		for(Show s:listOfShows)
 		{
-			s.setThreatre(this);
+			s.setTheatre(this);
 		}
 	}
 	

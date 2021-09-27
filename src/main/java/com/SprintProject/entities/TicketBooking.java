@@ -28,7 +28,7 @@ public class TicketBooking {
 	String transactionStatus;
 	double totalCost;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="show_id")
 	private Show show;
 	
@@ -36,7 +36,7 @@ public class TicketBooking {
 	@JoinColumn(name ="customerId", nullable =false)
 	private Customer customer;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="ticketId")
 	private Ticket ticket;
 
@@ -99,10 +99,11 @@ public class TicketBooking {
 	public Customer getCustomer() {
 		return customer;
 	}
-
+	
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
 	public Ticket getTicket() {
 		return ticket;
 	}

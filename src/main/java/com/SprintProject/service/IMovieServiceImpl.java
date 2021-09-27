@@ -28,7 +28,10 @@ public class IMovieServiceImpl implements IMovieService {
 	IShowRepository showrepo;
 	@Override
 	@Transactional
-	public Movie addMovie(Movie movie) {
+	public Movie addMovie(Movie movie,int theatreId) {
+		Theatre theatre= theatrerepo.findById(theatreId).orElseThrow(
+				()-> new EntityNotFoundException("There is no Theatre with this id, check id"));
+		movie.setTheatre(theatre);
 		return repository.save(movie);
 	}
 

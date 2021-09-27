@@ -28,8 +28,8 @@ public class Show {
 	String showName;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name ="threatreid")
-	Theatre threatre;
+	@JoinColumn(name ="theatreid")
+	Theatre theatre;
 	
 	@OneToOne(mappedBy="show")
 	Movie movie;
@@ -70,12 +70,12 @@ public class Show {
 		this.showName = showName;
 	}
 	@JsonIgnore
-	public Theatre getThreatre() {
-		return threatre;
+	public Theatre getTheatre() {
+		return theatre;
 	}
 
-	public void setThreatre(Theatre threatre) {
-		this.threatre = threatre;
+	public void setTheatre(Theatre threatre) {
+		this.theatre = threatre;
 	}
 	@JsonIgnore
 	public Movie getMovie() {

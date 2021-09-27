@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="ticket")
 @Table(name="ticket")
 public class Ticket {
@@ -52,7 +54,7 @@ public class Ticket {
 			s.setTicket(this);
 		}
 	}
-	
+	@JsonIgnore
 	public TicketBooking getTicketBookingref() {
 		return ticketBookingref;
 	}

@@ -25,7 +25,7 @@ public class Screen {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int screenId;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="theatre_id",nullable=false)
 	private Theatre theatre;
 	

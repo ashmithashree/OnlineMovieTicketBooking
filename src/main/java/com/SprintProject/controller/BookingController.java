@@ -33,14 +33,12 @@ public class BookingController {
 	@Autowired
 	IBookingService bookingService;
 	
-	@PostMapping("/booking")
+	@PostMapping("/{customerId}/{showId}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<TicketBooking> addBooking(@Valid @RequestBody TicketBooking booking) {
-		TicketBooking booking1 =bookingService.addBooking(booking);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(booking1.getTicketBookId())
-				.toUri();
-		return ResponseEntity.created(location).body(booking1);
+	public ResponseEntity<List<String>> addBooking(@PathVariable(name="customerId")int customerId ,
+			@RequestBody TicketBooking booking,@PathVariable(name="showId")int showId ) {
+		List<String> booking1 =bookingService.addBooking(booking,customerId,showId);
+		return ResponseEntity.created(null).body(booking1);
 	}
 	
 	@PutMapping("/Ticket")
@@ -61,8 +59,8 @@ public class BookingController {
 	public List<TicketBooking> showAllBooking(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		return bookingService.showAllBooking(date);
 	}
-	@GetMapping("/BookingShowId/{showid}")
-	public List<TicketBooking> showBookingList(@PathVariable(name ="showid")int showId) {
+	@RequestMapping(value = "/BookByShow/{showId}", method = RequestMethod.GET)
+	public List<TicketBooking> showBookingList(@PathVariable(name ="showId")int showId) {
 		return bookingService.showBookingList(showId);
 	}
 	@GetMapping("/Cost/{id}")
@@ -75,31 +73,31 @@ public class BookingController {
 		bookingService.initBooking(screenId);
 		return ResponseEntity.created(null).body("booking initiated");
 	}
-	@RequestMapping(value = "/customerAddition/{ticketId}/{customerId}", method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ResponseEntity<TicketBooking> addCustomer(@PathVariable(name="customerId")int customerId,@PathVariable(name="ticketbookId") int ticketbook) {
-		TicketBooking custticket= bookingService.addCustomer( customerId, ticketbook);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(customerId)
-				.toUri();
-		return ResponseEntity.created(location).body(custticket);
-	}
-	@RequestMapping(value = "/TicketAddition/{ticketbookId}/{ticketId}", method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ResponseEntity<TicketBooking> addTicket(@PathVariable(name="ticketId")int ticketId,@PathVariable(name="ticketbookId") int ticketbook) {
-		TicketBooking ticket= bookingService.addTicket( ticketId, ticketbook);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(ticketbook)
-				.toUri();
-		return ResponseEntity.created(location).body(ticket);
-	}
-	@RequestMapping(value = "/showAddition/{ticketbookId}/{showId}", method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ResponseEntity<TicketBooking> addShow(@PathVariable(name="showId")int showId,@PathVariable(name="ticketbookId") int ticketbook) {
-		TicketBooking ticket= bookingService.addShow( showId, ticketbook);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(ticketbook)
-				.toUri();
-		return ResponseEntity.created(location).body(ticket);
-	}
+//	@RequestMapping(value = "/customerAddition/{ticketId}/{customerId}", method = RequestMethod.PUT)
+//	@ResponseStatus(HttpStatus.ACCEPTED)
+//	public ResponseEntity<TicketBooking> addCustomer(@PathVariable(name="customerId")int customerId,@PathVariable(name="ticketId") int ticketbook) {
+//		TicketBooking custticket= bookingService.addCustomer( customerId, ticketbook);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//				.buildAndExpand(customerId)
+//				.toUri();
+//		return ResponseEntity.created(location).body(custticket);
+//	}
+//	@RequestMapping(value = "/TicketAddition/{ticketbookId}/{ticketId}", method = RequestMethod.PUT)
+//	@ResponseStatus(HttpStatus.ACCEPTED)
+//	public ResponseEntity<TicketBooking> addTicket(@PathVariable(name="ticketId")int ticketId,@PathVariable(name="ticketbookId") int ticketbook) {
+//		TicketBooking ticket= bookingService.addTicket( ticketId, ticketbook);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//				.buildAndExpand(ticketbook)
+//				.toUri();
+//		return ResponseEntity.created(location).body(ticket);
+//	}
+//	@RequestMapping(value = "/showAddition/{ticketbookId}/{showId}", method = RequestMethod.PUT)
+//	@ResponseStatus(HttpStatus.ACCEPTED)
+//	public ResponseEntity<TicketBooking> addShow(@PathVariable(name="showId")int showId,@PathVariable(name="ticketbookId") int ticketbook) {
+//		TicketBooking ticket= bookingService.addShow( showId, ticketbook);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//				.buildAndExpand(ticketbook)
+//				.toUri();
+//		return ResponseEntity.created(location).body(ticket);
+//	}
 }

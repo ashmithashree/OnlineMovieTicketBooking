@@ -5,7 +5,7 @@ import com.SprintProject.entities.TicketBooking;
 import java.util.List;
 
 public interface IBookingService {
-	public abstract TicketBooking addBooking(TicketBooking booking);
+	public abstract List<String> addBooking(TicketBooking booking, int customerId, int showId);
 	public abstract TicketBooking updateBooking(TicketBooking booking);
 	public abstract TicketBooking cancelBooking(TicketBooking booking);
 	public abstract List<TicketBooking> showAllBooking(int movieId);

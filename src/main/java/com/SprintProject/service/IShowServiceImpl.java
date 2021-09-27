@@ -52,13 +52,13 @@ public class IShowServiceImpl implements IShowService {
 		return repository.findById(showid).get();
 	}
 	@Override
-	public List<Show> viewShowList(int theaterid) {
-		return repository.findByThreatre(theaterid);
+	public List<Show> viewShowList(int theatreid) {
+		return repository.findByTheatre(theatreid);
 	}
 	@Override
-	public List<Show> viewShowList(LocalDate date) {
+	public List<Show> viewShowList(LocalDateTime date) {
 		
-		return repository.findByshowStartTime(date);
+		return repository.findByShowStartTime(date);
 	}
 	@Override
 	public List<Show> viewAllShows() {
@@ -81,7 +81,7 @@ public class IShowServiceImpl implements IShowService {
 				()-> new EntityNotFoundException("You should be a customer to book ticket, check id"));
 		Show show = repository.findById(showId).orElseThrow(
 				()-> new EntityNotFoundException("You don't have show with this id, check id"));
-		show.setThreatre(theatre);
+		show.setTheatre(theatre);
 		return repository.save(show);
 	}
 }

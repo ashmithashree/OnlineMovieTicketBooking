@@ -1,5 +1,6 @@
 package com.SprintProject.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -17,7 +18,7 @@ public class ISeatServiceImpl implements ISeatService {
 	ISeatRepository repository;
 
 	
-	int n=0;
+	int n=1;
 	@Override
 	@Transactional
 	public Seat cancleSeatBooking(Seat seat) {
@@ -33,21 +34,20 @@ public class ISeatServiceImpl implements ISeatService {
 		
 		return null;
 	}
+	
 	@Override
 	public List<Integer> bookSeat(int seat) {
 		// TODO Auto-generated method stub
-		
-		for(int i=n;i<seat;i++)
+		List<Integer> al=new ArrayList<Integer>();
+		for(int i=0;i<seat;i++)
 		{
-			if(repository.checkAvaliablity(i));
-			{
-				
-				//Seat c=findById(i);//update
-			}
-				
+			Seat s=repository.findById(n+i).orElseThrow(
+				 	() -> new EntityNotFoundException("No Seat found for the given ID"));
+			s.setBooked("yes");
+			al.add(s.getSeatId());
 		}
 		n+=seat;
-		return null; 
+		return al; 
 	}
 
 }
