@@ -53,23 +53,23 @@ public class MovieController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Movie> updateMovie(@Valid @RequestBody Movie movie) {
+	public ResponseEntity<?> updateMovie(@Valid @RequestBody Movie movie) {
 		Movie mov = movieService.updateMovie(movie);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("{/id}")
 				.buildAndExpand(mov.getMovieId())
 				.toUri();
-		return ResponseEntity.created(location).body(movie);
+		return ResponseEntity.created(location).body("Updated "+movie);
 	}
 	
 	@PostMapping("{theatreId}")
-	public ResponseEntity<Movie> addMovie(@RequestBody Movie movie,@PathVariable(name="theatreId") int theatreId) {
+	public ResponseEntity<?> addMovie(@RequestBody Movie movie,@PathVariable(name="theatreId") int theatreId) {
 		Movie mov = movieService.addMovie(movie,theatreId);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("{/id}")
 				.buildAndExpand(mov.getMovieId())
 				.toUri();
-		return ResponseEntity.created(location).body(movie);
+		return ResponseEntity.created(location).body("Created and add in database"+movie);
 	}
 	
 	@DeleteMapping("/{movieId}")
