@@ -34,7 +34,7 @@ public class ISeatServiceImpl implements ISeatService {
 	@Transactional
 	public Seat blockSeat(Seat seat) {
 		
-		return null;
+		return repository.save(seat);
 	}
 	
 	@Override

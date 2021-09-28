@@ -38,6 +38,14 @@ public class Show {
 	@JoinColumn(name ="Screenid")
 	private Screen screen;
 
+	public Show(int showId, LocalDateTime showStartTime, LocalDateTime showEndTime, String showName) {
+		super();
+		this.showId = showId;
+		this.showStartTime = showStartTime;
+		this.showEndTime = showEndTime;
+		this.showName = showName;
+	}
+
 	public int getShowId() {
 		return showId;
 	}

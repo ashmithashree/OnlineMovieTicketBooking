@@ -72,6 +72,19 @@ public class Seat {
 		return ticket;
 	}
 
+	public Seat(int seatId, String seatNumber, String type, double price) {
+		super();
+		this.seatId = seatId;
+		this.seatNumber = seatNumber;
+		this.type = type;
+		this.booked = booked;
+		this.price = price;
+	}
+
+	public Seat() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
