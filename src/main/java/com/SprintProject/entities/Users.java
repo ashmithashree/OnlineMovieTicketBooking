@@ -40,6 +40,15 @@ public class Users {
 	      inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName="role_id"))
   	private Set<Role> roles = new HashSet<>();
 	
+	public Users(int userId, String userName) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+	}
+	public Users() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getUserName() {
 		return userName;
 	}

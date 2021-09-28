@@ -34,6 +34,17 @@ public class Customer {
 	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
 	private Set<TicketBooking> ticket=new HashSet<>();
 	
+	
+	public Customer(int customerId, String customerName, String address, String mobileNumber, String email,
+			String password) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.address = address;
+		this.mobileNumber = mobileNumber;
+		this.email = email;
+		this.password = password;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}

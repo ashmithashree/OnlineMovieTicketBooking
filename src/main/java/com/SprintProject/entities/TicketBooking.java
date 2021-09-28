@@ -42,6 +42,19 @@ public class TicketBooking {
 	@JoinColumn(name="ticketId")
 	private Ticket ticket;
 
+	
+
+	public TicketBooking(int ticketBookId, LocalDate bookingDate, int transactionId, String transactionMode,
+			String transactionStatus, double totalCost) {
+		super();
+		this.ticketBookId = ticketBookId;
+		this.bookingDate = bookingDate;
+		this.transactionId = transactionId;
+		this.transactionMode = transactionMode;
+		this.transactionStatus = transactionStatus;
+		this.totalCost = totalCost;
+	}
+
 	public int getTicketBookId() {
 		return ticketBookId;
 	}
